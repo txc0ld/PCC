@@ -1,0 +1,10 @@
+node_modules
+.next
+out
+.env*.local
+.vercel
+.edge-profile
+app/quote-system
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store

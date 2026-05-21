@@ -1,0 +1,39 @@
+# Perth Concrete Care
+
+> Perth Concrete Care provides polished concrete, honed concrete, grind and seal, and epoxy flooring for residential, commercial, hospitality, and industrial projects across Perth, Western Australia.
+
+Last updated: 2026-05-22
+
+## Core pages
+
+- Home: https://perthconcretecare.com.au/
+- Services: https://perthconcretecare.com.au/services
+- Work examples: https://perthconcretecare.com.au/work
+- Contact and quote request: https://perthconcretecare.com.au/contact#quote
+- Agent-readable catalog: https://perthconcretecare.com.au/api/agent/catalog
+
+## Services
+
+- Polished concrete: https://perthconcretecare.com.au/services/polished
+- Honed concrete: https://perthconcretecare.com.au/services/honed
+- Grind and seal: https://perthconcretecare.com.au/services/grind-seal
+- Epoxy coatings: https://perthconcretecare.com.au/services/epoxy
+
+## Canonical facts
+
+- Business name: Perth Concrete Care
+- ABN: 63 775 263 307
+- Phone: 0448 483 226
+- Email: sales@perthconcretecare.com.au
+- Service area: Perth metro and surrounding suburbs in Western Australia
+- Primary action: Request Quote at https://perthconcretecare.com.au/contact#quote
+
+## Price guide
+
+- Ultra Flake epoxy: $75 - $85 per m2
+- Hyper Flake epoxy: $90 - $100 per m2
+- Grind and seal: $65 - $95 per m2
+- Honed concrete: $120 - $160 per m2
+- Mechanical polish: $160 - $220 per m2
+
+Final pricing depends on site inspection, access, slab condition, repairs, exposure, coating specification, exclusions, GST treatment, and program.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "GEO Blueprint 2026"
+  short_description: "Optimize websites for AI citations and agentic search."
+  default_prompt: "Apply the GEO Blueprint 2026 checklist to this site."
