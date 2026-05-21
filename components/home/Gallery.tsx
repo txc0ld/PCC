@@ -50,13 +50,13 @@ function WorkGrid({
             className={i === 0 || i === 5 ? "md:col-span-2" : ""}
           >
             <figure className="group">
-              <div className="relative overflow-hidden bg-[var(--color-limestone)]" style={{ aspectRatio: i === 0 || i === 5 ? "16/10" : "1/1" }}>
+              <div className="relative overflow-hidden" style={{ aspectRatio: "3/2" }}>
                 <Image
                   src={src}
                   alt={`${name} by Perth Concrete Care`}
                   fill
                   sizes={i === 0 || i === 5 ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 100vw"}
-                  className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-default)] group-hover:scale-[1.03]"
+                  className="object-cover transition-transform duration-[var(--duration-slow)] ease-[var(--ease-default)] group-hover:scale-[1.03]"
                 />
               </div>
               <figcaption className="mt-3 border-t border-[var(--hairline)] pt-3 text-[12px] font-bold leading-tight text-[var(--color-text-primary)]">

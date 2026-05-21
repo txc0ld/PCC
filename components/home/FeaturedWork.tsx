@@ -97,7 +97,12 @@ function Project({
   large?: boolean;
 }) {
   return (
-    <Link href={`/work/${project.slug}`} className="group block h-full bg-[rgba(255,248,236,0.02)] p-4 transition-colors hover:bg-[rgba(255,248,236,0.07)] md:p-6">
+    <Link
+      href={`/work/${project.slug}`}
+      className={`group flex h-full flex-col bg-[rgba(255,248,236,0.02)] p-4 transition-colors hover:bg-[rgba(255,248,236,0.07)] md:p-6 ${
+        large ? "md:justify-center" : ""
+      }`}
+    >
       <figure>
         <div className="relative overflow-hidden bg-[var(--color-charcoal)]" style={{ aspectRatio: large ? "16/11" : "16/10" }}>
           <Image
