@@ -1,8 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { Container } from "@/components/ui/Container";
-import { ImagePlate, type PlateTone } from "@/components/ui/ImagePlate";
 import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/utils";
 import { FLOOR_IMAGES } from "@/lib/images";
@@ -10,14 +10,13 @@ import { FLOOR_IMAGES } from "@/lib/images";
 const finishes: Array<{
   name: string;
   depth: string;
-  tone: PlateTone;
   image: string;
   copy: string;
 }> = [
-  { name: "Cream", depth: "Nil exposure", tone: "ash", image: FLOOR_IMAGES.nilExposure, copy: "Soft and minimal. Best when the slab surface is consistent and a quieter finish is preferred." },
-  { name: "Salt and pepper", depth: "Light exposure", tone: "cream", image: FLOOR_IMAGES.saltPepper, copy: "Fine sand and small flecks. The most balanced residential polished concrete look." },
-  { name: "Medium aggregate", depth: "3 to 5 mm", tone: "stone", image: FLOOR_IMAGES.mediumExposure, copy: "More stone character with a strong architectural read across larger rooms." },
-  { name: "Full aggregate", depth: "5 to 8 mm", tone: "slate", image: FLOOR_IMAGES.fullStone, copy: "A terrazzo-like finish. Best planned before the pour when aggregate choice matters." },
+  { name: "Cream", depth: "Nil exposure", image: FLOOR_IMAGES.nilExposure, copy: "Soft and minimal. Best when the slab surface is consistent and a quieter finish is preferred." },
+  { name: "Salt and pepper", depth: "Light exposure", image: FLOOR_IMAGES.saltPepper, copy: "Fine sand and small flecks. The most balanced residential polished concrete look." },
+  { name: "Medium aggregate", depth: "3 to 5 mm", image: FLOOR_IMAGES.mediumExposure, copy: "More stone character with a strong architectural read across larger rooms." },
+  { name: "Full aggregate", depth: "5 to 8 mm", image: FLOOR_IMAGES.fullStone, copy: "A terrazzo-like finish. Best planned before the pour when aggregate choice matters." },
 ];
 
 export function ExposurePicker() {
@@ -48,13 +47,22 @@ export function ExposurePicker() {
 
           <div className="grid grid-cols-1 border border-[var(--hairline-strong)] bg-[var(--hairline)] lg:grid-cols-[1fr_280px]">
             <Reveal stagger={120}>
-              <ImagePlate tone={finish.tone} src={finish.image} alt={`${finish.name} polished concrete finish`} aspect="1/1" className="min-h-[320px]">
-                <div className="absolute inset-x-0 bottom-0 border-t border-[var(--hairline)] bg-[rgba(251,247,239,0.92)] p-4 backdrop-blur">
+              <figure className="bg-[var(--color-paper)]">
+                <div className="relative aspect-[4/3] min-h-[280px] overflow-hidden lg:aspect-square">
+                  <Image
+                    src={finish.image}
+                    alt={`${finish.name} polished concrete finish`}
+                    fill
+                    sizes="(min-width: 1024px) 58vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <figcaption className="border-t border-[var(--hairline)] p-4">
                   <p className="t-eyebrow text-[var(--color-text-muted)]">{finish.depth}</p>
                   <h3 className="t-headline mt-2 text-[var(--color-text-primary)]">{finish.name}</h3>
                   <p className="t-body-sm mt-3 max-w-[52ch] text-[var(--color-text-muted)]">{finish.copy}</p>
-                </div>
-              </ImagePlate>
+                </figcaption>
+              </figure>
             </Reveal>
 
             <div className="grid gap-px bg-[var(--hairline)]">

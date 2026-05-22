@@ -41,7 +41,7 @@ export function Process() {
                 key={title}
                 as="li"
                 stagger={i * 80}
-                className="flex min-h-[240px] flex-col justify-between border-b border-[var(--hairline)] bg-[rgba(251,247,239,0.44)] p-5 last:border-b-0 md:border-r xl:border-b-0 xl:last:border-r-0"
+                className="flex min-h-[180px] flex-col justify-between border-b border-[var(--hairline)] bg-[rgba(251,247,239,0.44)] p-5 last:border-b-0 md:min-h-[220px] md:border-r xl:border-b-0 xl:last:border-r-0"
               >
                 <span className="t-mono text-[11px] text-[var(--color-text-muted)]">
                   {String(i + 1).padStart(2, "0")}

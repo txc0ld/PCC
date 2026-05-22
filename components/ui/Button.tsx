@@ -13,6 +13,7 @@ type Common = {
 
 const base =
   "group relative inline-flex min-h-12 items-center justify-center gap-2 rounded-none " +
+  "w-full cursor-pointer sm:w-auto disabled:cursor-not-allowed disabled:opacity-55 " +
   "px-6 py-3 text-[14px] font-extrabold uppercase tracking-[0.08em] " +
   "transition-[background,color,border-color,transform] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] " +
   "active:scale-[0.98] active:duration-[120ms] " +
@@ -27,7 +28,7 @@ const variants: Record<Variant, string> = {
     "bg-[var(--color-oxide)] text-[var(--color-ink)] hover:bg-[var(--color-oxide-pressed)]",
 };
 
-function Arrow() {
+export function ButtonArrow() {
   return (
     <svg
       width="16"
@@ -57,7 +58,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   return (
     <button ref={ref} className={cn(base, variants[variant], className)} {...rest}>
       <span>{children}</span>
-      {icon && <Arrow />}
+      {icon && <ButtonArrow />}
     </button>
   );
 });
@@ -77,7 +78,7 @@ export function LinkButton({
     return (
       <a href={href} className={cls} target="_blank" rel="noreferrer">
         <span>{children}</span>
-        {icon && <Arrow />}
+        {icon && <ButtonArrow />}
       </a>
     );
   }
@@ -85,7 +86,7 @@ export function LinkButton({
   return (
     <Link href={href} className={cls}>
       <span>{children}</span>
-      {icon && <Arrow />}
+      {icon && <ButtonArrow />}
     </Link>
   );
 }

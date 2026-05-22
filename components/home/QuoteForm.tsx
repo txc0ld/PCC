@@ -22,14 +22,22 @@ const initial: State = {
 export function QuoteForm() {
   const [values, setValues] = useState<State>(initial);
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [contactError, setContactError] = useState(false);
 
   const onChange =
     (key: FieldKey) =>
     (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-      setValues((current) => ({ ...current, [key]: event.target.value }));
+      setValues((current) => {
+        if (key === "email" || key === "phone") setContactError(false);
+        return { ...current, [key]: event.target.value };
+      });
 
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
+    if (!values.email.trim() && !values.phone.trim()) {
+      setContactError(true);
+      return;
+    }
     setStatus("sending");
     const subject = `Quote request - ${values.suburb || "Perth Concrete Care"}`;
     const body = [
@@ -37,7 +45,7 @@ export function QuoteForm() {
       "",
       `Name: ${values.name}`,
       `Suburb: ${values.suburb}`,
-      `Approx. area: ${values.area} m2`,
+      `Approx. area: ${values.area} m²`,
       `Finish interest: ${values.finish || "Not sure yet"}`,
       `Email: ${values.email}`,
       `Phone: ${values.phone}`,
@@ -102,12 +110,17 @@ export function QuoteForm() {
               </div>
             ) : (
               <form onSubmit={submit} className="grid grid-cols-1 gap-3 md:grid-cols-6">
-                <Field label="Name" name="name" value={values.name} onChange={onChange("name")} required className="md:col-span-6" />
-                <Field label="Suburb" name="suburb" value={values.suburb} onChange={onChange("suburb")} required className="md:col-span-3" />
-                <Field label="Approx. area (m2)" name="area" type="number" value={values.area} onChange={onChange("area")} required className="md:col-span-3" />
+                <Field label="Name" name="name" value={values.name} onChange={onChange("name")} required autoComplete="name" className="md:col-span-6" />
+                <Field label="Suburb" name="suburb" value={values.suburb} onChange={onChange("suburb")} required autoComplete="address-level2" className="md:col-span-3" />
+                <Field label="Approx. area (m²)" name="area" type="number" value={values.area} onChange={onChange("area")} required inputMode="decimal" className="md:col-span-3" />
                 <SelectField label="Finish interest" name="finish" value={values.finish} onChange={onChange("finish")} className="md:col-span-6" />
-                <Field label="Email" name="email" type="email" value={values.email} onChange={onChange("email")} required className="md:col-span-3" />
-                <Field label="Phone" name="phone" type="tel" value={values.phone} onChange={onChange("phone")} className="md:col-span-3" />
+                <Field label="Email" name="email" type="email" value={values.email} onChange={onChange("email")} autoComplete="email" inputMode="email" className="md:col-span-3" />
+                <Field label="Phone" name="phone" type="tel" value={values.phone} onChange={onChange("phone")} autoComplete="tel" inputMode="tel" className="md:col-span-3" />
+                {contactError && (
+                  <p className="t-caption text-[var(--color-oxide)] md:col-span-6">
+                    Add an email or phone number so we can return the quote.
+                  </p>
+                )}
                 <Field label="Slab, timing, goals" name="description" textarea value={values.description} onChange={onChange("description")} className="md:col-span-6" />
 
                 <div className="mt-5 flex flex-col gap-4 md:col-span-6 md:flex-row md:items-center">
@@ -135,6 +148,8 @@ type FieldProps = {
   type?: string;
   required?: boolean;
   textarea?: boolean;
+  autoComplete?: string;
+  inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
   className?: string;
 };
 
@@ -146,17 +161,20 @@ function Field({
   type = "text",
   required,
   textarea,
+  autoComplete,
+  inputMode,
   className,
 }: FieldProps) {
   const [focused, setFocused] = useState(false);
   const active = focused || value.length > 0;
+  const labelActive = textarea || active;
 
   return (
     <label className={cn("relative block", className)} htmlFor={name}>
       <span
         className={cn(
           "pointer-events-none absolute left-4 transition-all duration-200",
-          active
+          labelActive
             ? "top-2 text-[10px] uppercase tracking-[0.1em] text-[var(--color-text-inverse)]/55"
             : "top-1/2 -translate-y-1/2 text-[15px] text-[var(--color-text-inverse)]/55"
         )}
@@ -183,6 +201,8 @@ function Field({
           name={name}
           type={type}
           required={required}
+          autoComplete={autoComplete}
+          inputMode={inputMode}
           value={value}
           onChange={onChange}
           onFocus={() => setFocused(true)}

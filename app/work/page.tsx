@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { LinkButton } from "@/components/ui/Button";
+import { ButtonArrow, LinkButton } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { FLOOR_IMAGES } from "@/lib/images";
@@ -93,13 +93,13 @@ export default function WorkIndex() {
               <Reveal as="li" key={project.slug} stagger={(i % 2) * 80}>
                 <Link href={`/work/${project.slug}`} className="group block" aria-label={project.title}>
                   <figure>
-                    <div className="relative aspect-square overflow-hidden bg-[var(--color-limestone)]">
+                    <div className="relative aspect-[3/2] overflow-hidden">
                       <Image
                         src={project.image}
                         alt={`${project.title} concrete flooring project`}
                         fill
                         sizes="(min-width: 768px) 50vw, 100vw"
-                        className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-default)] group-hover:scale-[1.02]"
+                        className="object-cover transition-transform duration-[var(--duration-slow)] ease-[var(--ease-default)] group-hover:scale-[1.02]"
                       />
                     </div>
                     <figcaption className="mt-3 flex items-center justify-between border-t border-[var(--hairline)] pt-3">
@@ -118,8 +118,8 @@ export default function WorkIndex() {
                     </div>
                     <div className="sm:max-w-[220px] sm:text-right">
                       <p className="t-body-sm text-[var(--color-text-muted)]">{project.finish}</p>
-                      <span aria-hidden="true" className="t-caption mt-4 inline-block text-[var(--color-text-primary)] transition-transform group-hover:translate-x-1">
-                        View project {"->"}
+                      <span aria-hidden="true" className="t-caption mt-4 inline-flex items-center gap-2 text-[var(--color-text-primary)] transition-transform group-hover:translate-x-1">
+                        View project <ButtonArrow />
                       </span>
                     </div>
                   </div>

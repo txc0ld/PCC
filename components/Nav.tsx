@@ -28,14 +28,25 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
     <>
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-[border-color,background] duration-300",
           solid
-            ? "border-b border-[var(--hairline)] bg-[rgba(251,247,239,0.94)] backdrop-blur-xl"
-            : "border-b border-[var(--hairline-dark)] bg-[rgba(16,16,14,0.3)] text-[var(--color-text-inverse)] backdrop-blur-md"
+            ? "border-b border-[var(--hairline)] bg-[rgba(251,247,239,0.98)]"
+            : "border-b border-[var(--hairline-dark)] bg-[rgba(16,16,14,0.56)] text-[var(--color-text-inverse)]"
         )}
       >
         <div className="container-pcc flex h-[var(--nav-h)] items-center justify-between gap-5">
@@ -79,17 +90,22 @@ export function Nav() {
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((value) => !value)}
-            className={cn("relative h-11 w-11 md:hidden", solid ? "text-[var(--color-text-primary)]" : "text-[var(--color-text-inverse)]")}
+            className={cn(
+              "relative ml-auto h-11 w-11 shrink-0 border md:hidden",
+              solid
+                ? "border-[var(--hairline-strong)] bg-[rgba(251,247,239,0.82)] text-[var(--color-text-primary)]"
+                : "border-[rgba(255,248,236,0.34)] bg-[rgba(16,16,14,0.18)] text-[var(--color-text-inverse)]"
+            )}
           >
-            <span className={cn("absolute left-1/2 top-1/2 h-px w-5 -translate-x-1/2 bg-current transition-transform", open ? "rotate-45" : "-translate-y-1.5")} />
-            <span className={cn("absolute left-1/2 top-1/2 h-px w-5 -translate-x-1/2 bg-current transition-transform", open ? "-rotate-45" : "translate-y-1.5")} />
+            <span className={cn("absolute left-1/2 top-1/2 h-[2px] w-6 -translate-x-1/2 bg-current transition-transform", open ? "rotate-45" : "-translate-y-1.5")} />
+            <span className={cn("absolute left-1/2 top-1/2 h-[2px] w-6 -translate-x-1/2 bg-current transition-transform", open ? "-rotate-45" : "translate-y-1.5")} />
           </button>
         </div>
       </header>
 
       <div
         className={cn(
-          "fixed inset-0 z-40 bg-[var(--color-ink)] pt-[var(--nav-h)] text-[var(--color-text-inverse)] transition-[opacity,clip-path] duration-400 md:hidden",
+          "fixed inset-0 z-40 overflow-y-auto bg-[var(--color-ink)] pt-[var(--nav-h)] text-[var(--color-text-inverse)] transition-[opacity,clip-path] duration-400 md:hidden",
           open ? "pointer-events-auto opacity-100 [clip-path:inset(0)]" : "pointer-events-none opacity-0 [clip-path:inset(0_0_100%_0)]"
         )}
       >

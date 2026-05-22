@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { QuoteCalculator } from "@/components/quote/QuoteCalculator";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Quote Calculator",
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function QuotePage() {
-  return <QuoteCalculator />;
+  redirect("/contact#quote");
 }

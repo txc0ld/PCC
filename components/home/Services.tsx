@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { ButtonArrow } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { FLOOR_IMAGES } from "@/lib/images";
@@ -79,7 +80,7 @@ export function Services() {
                     <span className="t-mono pt-1 text-[11px] text-[var(--color-text-muted)] sm:pt-2 lg:pt-0">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="relative block aspect-square w-full max-w-[160px] overflow-hidden bg-[var(--color-limestone)] sm:max-w-none">
+                    <span className="relative block aspect-[3/2] w-full overflow-hidden sm:aspect-square">
                       <Image
                         src={service.image}
                         alt={`${service.title} example floor`}
@@ -107,7 +108,7 @@ export function Services() {
                       </span>
                     </span>
                     <span aria-hidden="true" className="hidden h-11 w-11 items-center justify-center justify-self-end border border-[var(--hairline)] text-[15px] text-[var(--color-text-muted)] transition-all group-hover:border-[var(--color-oxide)] group-hover:bg-[var(--color-oxide)] group-hover:text-[var(--color-ink)] lg:flex">
-                      {"->"}
+                      <ButtonArrow />
                     </span>
                   </Link>
                 </Reveal>

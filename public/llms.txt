@@ -6,18 +6,18 @@ Last updated: 2026-05-22
 
 ## Core pages
 
-- Home: https://perthconcretecare.com.au/
-- Services: https://perthconcretecare.com.au/services
-- Work examples: https://perthconcretecare.com.au/work
-- Contact and quote request: https://perthconcretecare.com.au/contact#quote
-- Agent-readable catalog: https://perthconcretecare.com.au/api/agent/catalog
+- Home: https://perthconcretepolishing.com.au/
+- Services: https://perthconcretepolishing.com.au/services
+- Work examples: https://perthconcretepolishing.com.au/work
+- Contact and quote request: https://perthconcretepolishing.com.au/contact#quote
+- Agent-readable catalog: https://perthconcretepolishing.com.au/api/agent/catalog
 
 ## Services
 
-- Polished concrete: https://perthconcretecare.com.au/services/polished
-- Honed concrete: https://perthconcretecare.com.au/services/honed
-- Grind and seal: https://perthconcretecare.com.au/services/grind-seal
-- Epoxy coatings: https://perthconcretecare.com.au/services/epoxy
+- Polished concrete: https://perthconcretepolishing.com.au/services/polished
+- Honed concrete: https://perthconcretepolishing.com.au/services/honed
+- Grind and seal: https://perthconcretepolishing.com.au/services/grind-seal
+- Epoxy coatings: https://perthconcretepolishing.com.au/services/epoxy
 
 ## Canonical facts
 
@@ -26,14 +26,14 @@ Last updated: 2026-05-22
 - Phone: 0448 483 226
 - Email: sales@perthconcretecare.com.au
 - Service area: Perth metro and surrounding suburbs in Western Australia
-- Primary action: Request Quote at https://perthconcretecare.com.au/contact#quote
+- Primary action: Request Quote at https://perthconcretepolishing.com.au/contact#quote
 
 ## Price guide
 
-- Ultra Flake epoxy: $75 - $85 per m2
-- Hyper Flake epoxy: $90 - $100 per m2
-- Grind and seal: $65 - $95 per m2
-- Honed concrete: $120 - $160 per m2
-- Mechanical polish: $160 - $220 per m2
+- Ultra Flake epoxy: $75 - $85 per square metre
+- Hyper Flake epoxy: $90 - $100 per square metre
+- Grind and seal: $65 - $95 per square metre
+- Honed concrete: $120 - $160 per square metre
+- Mechanical polish: $160 - $220 per square metre
 
 Final pricing depends on site inspection, access, slab condition, repairs, exposure, coating specification, exclusions, GST treatment, and program.

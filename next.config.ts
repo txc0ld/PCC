@@ -7,6 +7,28 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const config: NextConfig = {
   reactStrictMode: true,
   outputFileTracingRoot: __dirname,
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "perthconcretecare.com.au" }],
+        destination: "https://perthconcretepolishing.com.au/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.perthconcretecare.com.au" }],
+        destination: "https://perthconcretepolishing.com.au/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.perthconcretepolishing.com.au" }],
+        destination: "https://perthconcretepolishing.com.au/:path*",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { LinkButton } from "@/components/ui/Button";
 import { EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/lib/utils";
 
@@ -37,8 +38,8 @@ export function Footer() {
       <div className="container-pcc py-12 md:py-16">
         <div className="grid grid-cols-1 gap-10 border-y border-[var(--hairline-dark)] py-12 md:grid-cols-[1fr_auto] md:items-center">
           <div className="flex items-center gap-5">
-            <div className="relative h-20 w-20 shrink-0 overflow-hidden bg-black p-2 md:h-24 md:w-24">
-              <img src="/LOGO.png" alt="Perth Concrete Care" className="h-full w-full object-contain" />
+            <div className="relative h-20 w-20 shrink-0 overflow-hidden bg-black md:h-24 md:w-24">
+              <Image src="/LOGO.png" alt="Perth Concrete Care" fill sizes="96px" className="object-contain p-2" />
             </div>
             <div>
               <p className="text-[15px] font-extrabold uppercase leading-tight tracking-[0.14em]">

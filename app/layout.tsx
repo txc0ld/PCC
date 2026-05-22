@@ -11,12 +11,13 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Perth Concrete Care - Polished concrete and epoxy flooring Perth",
+    default: "Perth Concrete Care - Concrete polishing Perth",
     template: "%s - Perth Concrete Care",
   },
   description:
-    "Professional polished concrete, honed concrete, grind and seal, and epoxy flooring for residential, commercial, and industrial projects across Perth, Western Australia.",
-  metadataBase: new URL("https://perthconcretecare.com.au"),
+    "Professional concrete polishing, polished concrete, honed concrete, grind and seal, and epoxy flooring for residential, commercial, and industrial projects across Perth, Western Australia.",
+  metadataBase: new URL("https://perthconcretepolishing.com.au"),
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "en_AU",

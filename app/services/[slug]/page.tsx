@@ -4,7 +4,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LinkButton } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import type { PlateTone } from "@/components/ui/ImagePlate";
 import { Reveal } from "@/components/ui/Reveal";
 import { StructuredData } from "@/components/StructuredData";
 import { GEO_SERVICES, LAST_UPDATED_DISPLAY, serviceJsonLd } from "@/lib/geo";
@@ -16,7 +15,6 @@ type Svc = {
   whatItIs: string;
   bestFor: string[];
   priceRange: string;
-  tone: PlateTone;
   image: string;
   outcome: string;
   process: string[];
@@ -32,7 +30,6 @@ const db: Record<string, Svc> = {
       "We grind the slab with diamond tooling, densify it chemically so the concrete becomes harder, then polish through the specified grit sequence. The reflection comes from the concrete itself, not a film sitting on top.",
     bestFor: ["Homes", "Showrooms", "Hospitality", "Retail"],
     priceRange: "$160 - $220 / m²",
-    tone: "cream",
     image: FLOOR_IMAGES.saltPepper,
     outcome: "A clean architectural floor with controlled aggregate exposure, better light return, and no topical coating to peel.",
     process: ["Slab inspection and exposure sample", "Progressive metal-bond grinding", "Grout, densifier, and edge detailing", "Resin polishing to selected sheen", "Guard application and handover"],
@@ -46,7 +43,6 @@ const db: Record<string, Svc> = {
       "We grind to the specified exposure and stop at a quieter grit level, then protect the floor with a penetrating guard. It suits spaces that need texture, restraint, and natural variation.",
     bestFor: ["Homes", "Cafes", "Outdoor rooms", "Pool surrounds"],
     priceRange: "$120 - $160 / m²",
-    tone: "stone",
     image: FLOOR_IMAGES.honed,
     outcome: "A softer concrete surface with visible aggregate, low reflection, and a natural feel underfoot.",
     process: ["Review slip, drainage, and exposure needs", "Cut to the selected aggregate level", "Refine scratches through the honing sequence", "Apply suitable penetrating protection", "Confirm cleaning method and reseal cycle"],
@@ -60,7 +56,6 @@ const db: Record<string, Svc> = {
       "A controlled grind cleans and flattens the floor before a primer and high-wear sealer system are applied. It is efficient for large working floors and back-of-house spaces.",
     bestFor: ["Warehouses", "Workshops", "Back-of-house retail"],
     priceRange: "$65 - $95 / m²",
-    tone: "slate",
     image: FLOOR_IMAGES.workGrindSeal,
     outcome: "A cost-effective concrete finish with improved cleanability, clearer light, and a sacrificial coating that can be refreshed.",
     process: ["Check contamination, cracks, and coating history", "Mechanical grind and floor preparation", "Repair local defects where required", "Apply primer and sealer system", "Confirm cure time before return to service"],
@@ -74,7 +69,6 @@ const db: Record<string, Svc> = {
       "We mechanically prepare the slab, apply primer, build the epoxy layer, and finish with a suitable top coat. Systems can be solid colour, flake, marked, or specified for chemical resistance.",
     bestFor: ["Garages", "Workshops", "Food prep areas", "Plant rooms"],
     priceRange: "$75 - $100 / m²",
-    tone: "iron",
     image: FLOOR_IMAGES.epoxyGraphite,
     outcome: "A sealed resin floor that handles heavier wear, easier cleaning, and clear zoning or colour requirements.",
     process: ["Moisture, contamination, and adhesion checks", "Diamond grind or shot-blast preparation", "Crack repair and joint planning", "Primer, body coat, and broadcast where specified", "Top coat, cure window, and line marking"],
@@ -133,7 +127,7 @@ export default async function ServiceDetail(props: {
               </Reveal>
             </div>
             <Reveal stagger={220} className="md:col-span-5">
-              <div className="relative overflow-hidden bg-[var(--color-limestone)]" style={{ aspectRatio: "4/3" }}>
+              <div className="relative overflow-hidden" style={{ aspectRatio: "4/3" }}>
                 <Image
                   src={svc.image}
                   alt={`${svc.title} example floor`}

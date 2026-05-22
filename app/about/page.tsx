@@ -1,6 +1,6 @@
+import Image from "next/image";
 import { LinkButton } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { ImagePlate } from "@/components/ui/ImagePlate";
 import { Reveal } from "@/components/ui/Reveal";
 import { FLOOR_IMAGES } from "@/lib/images";
 
@@ -81,7 +81,14 @@ export default function AboutPage() {
         <Container>
           <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
             <Reveal className="md:col-span-5">
-              <ImagePlate tone="cream" src={FLOOR_IMAGES.saltPepper} aspect="1/1" caption="Material-led work" rounded />
+              <Image
+                src={FLOOR_IMAGES.saltPepper}
+                alt="Salt and pepper polished concrete finish sample"
+                width={1200}
+                height={800}
+                sizes="(min-width: 768px) 42vw, 100vw"
+                className="h-auto w-full"
+              />
             </Reveal>
             <div className="md:col-span-7">
               <Reveal>

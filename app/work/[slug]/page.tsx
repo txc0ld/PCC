@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LinkButton } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import type { PlateTone } from "@/components/ui/ImagePlate";
 import { Reveal } from "@/components/ui/Reveal";
 import { FLOOR_IMAGES } from "@/lib/images";
 
@@ -14,7 +14,6 @@ type Project = {
   area: string;
   location: string;
   finish: string;
-  tone: PlateTone;
   image: string;
   summary: string;
   brief: string;
@@ -28,10 +27,9 @@ const projects: Record<string, Project> = {
     title: "Cottesloe Residence",
     category: "Residential",
     year: "2025",
-    area: "240 m2",
+    area: "240 m²",
     location: "Cottesloe",
     finish: "Satin polished concrete",
-    tone: "cream",
     image: FLOOR_IMAGES.workCottesloe,
     summary: "A calm internal polish for a coastal home where glare control and edge detailing mattered as much as sheen.",
     brief: "The client wanted a continuous ground-floor surface that felt refined without becoming glossy or slippery in bright western light.",
@@ -43,10 +41,9 @@ const projects: Record<string, Project> = {
     title: "Osborne Park Showroom",
     category: "Commercial",
     year: "2024",
-    area: "620 m2",
+    area: "620 m²",
     location: "Osborne Park",
     finish: "Full exposure polish",
-    tone: "slate",
     image: FLOOR_IMAGES.workOsbornePark,
     summary: "A durable showroom floor designed to handle display changes, customer traffic, and strong overhead lighting.",
     brief: "The slab needed enough aggregate character to feel intentional while staying easy to clean and robust under rolling displays.",
@@ -58,10 +55,9 @@ const projects: Record<string, Project> = {
     title: "Kewdale Warehouse",
     category: "Industrial",
     year: "2024",
-    area: "1,850 m2",
+    area: "1,850 m²",
     location: "Kewdale",
     finish: "Grind and seal",
-    tone: "iron",
     image: FLOOR_IMAGES.workKewdale,
     summary: "A practical working floor upgrade for better light, cleaner traffic paths, and easier daily maintenance.",
     brief: "The priority was return-to-service speed and a finish that would tolerate pallet movement, forklifts, and routine cleaning.",
@@ -73,10 +69,9 @@ const projects: Record<string, Project> = {
     title: "Peppermint Grove House",
     category: "Residential",
     year: "2024",
-    area: "310 m2",
+    area: "310 m²",
     location: "Peppermint Grove",
     finish: "Low-glare honed concrete",
-    tone: "mid",
     image: FLOOR_IMAGES.workPeppermintGrove,
     summary: "A low-glare honed finish selected for a restrained residential interior with natural stone and timber.",
     brief: "The floor needed material depth without a polished reflection, keeping the interior calm through large glazed openings.",
@@ -88,10 +83,9 @@ const projects: Record<string, Project> = {
     title: "North Perth Cafe",
     category: "Hospitality",
     year: "2024",
-    area: "140 m2",
+    area: "140 m²",
     location: "North Perth",
     finish: "Honed and guarded",
-    tone: "ash",
     image: FLOOR_IMAGES.workNorthPerthCafe,
     summary: "A hospitality floor tuned for spill response, morning cleaning, and warm material character.",
     brief: "The cafe needed a finish that could handle chairs, coffee spills, and visible customer areas without feeling industrial.",
@@ -103,10 +97,9 @@ const projects: Record<string, Project> = {
     title: "Fremantle Loft",
     category: "Residential",
     year: "2023",
-    area: "180 m2",
+    area: "180 m²",
     location: "Fremantle",
     finish: "Salt and pepper polish",
-    tone: "cream",
     image: FLOOR_IMAGES.workFremantleLoft,
     summary: "A compact residential polish using the slab's natural fleck rather than forcing heavy exposure.",
     brief: "The apartment needed a lighter finish with enough movement to sit comfortably against brick, steel, and old timber.",
@@ -118,10 +111,9 @@ const projects: Record<string, Project> = {
     title: "Subiaco Gallery",
     category: "Commercial",
     year: "2023",
-    area: "420 m2",
+    area: "420 m²",
     location: "Subiaco",
     finish: "Matte polished concrete",
-    tone: "stone",
     image: FLOOR_IMAGES.workSubiacoGallery,
     summary: "A matte commercial polish that lets artwork and objects take priority while improving durability.",
     brief: "The floor had to feel refined but visually quiet, with minimal glare under gallery lighting.",
@@ -133,10 +125,9 @@ const projects: Record<string, Project> = {
     title: "Midland Warehouse",
     category: "Industrial",
     year: "2023",
-    area: "2,400 m2",
+    area: "2,400 m²",
     location: "Midland",
     finish: "Epoxy traffic coating",
-    tone: "slate",
     image: FLOOR_IMAGES.workMidlandWarehouse,
     summary: "A resin traffic coating for clearer circulation, easier cleaning, and heavier warehouse use.",
     brief: "The site needed a stronger coating system with clear zones and a maintenance plan suited to vehicle movement.",
@@ -208,10 +199,14 @@ export default async function ProjectDetail(props: {
             </Reveal>
           </div>
           <Reveal stagger={320} className="mt-10">
-            <img
+            <Image
               src={project.image}
               alt={`${project.title} concrete flooring project`}
+              width={1536}
+              height={1024}
+              sizes="(min-width: 1024px) 1248px, 100vw"
               className="block h-auto w-full"
+              priority
             />
           </Reveal>
         </Container>
@@ -290,7 +285,7 @@ export default async function ProjectDetail(props: {
           <Reveal stagger={120}>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <LinkButton href="/contact#quote" variant="primary">
-                Discuss a similar floor
+                Request Quote for Similar Work
               </LinkButton>
               <LinkButton href="/work" variant="ghost">
                 View more work

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { LinkButton } from "@/components/ui/Button";
+import { ButtonArrow, LinkButton } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { FLOOR_IMAGES } from "@/lib/images";
@@ -152,7 +152,7 @@ export default function ServicesIndex() {
                   <span className="t-mono text-[11px] text-[var(--color-text-muted)] sm:pt-2 lg:pt-0">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="relative block aspect-[4/3] overflow-hidden bg-[var(--color-limestone)]">
+                  <span className="relative block aspect-[4/3] overflow-hidden">
                     <Image
                       src={service.image}
                       alt={`${service.title} example floor`}
@@ -180,7 +180,7 @@ export default function ServicesIndex() {
                     </span>
                   </span>
                   <span aria-hidden="true" className="hidden h-11 w-11 items-center justify-center justify-self-end border border-[var(--hairline)] text-[15px] text-[var(--color-text-muted)] transition-all group-hover:border-[var(--color-oxide)] group-hover:bg-[var(--color-oxide)] group-hover:text-[var(--color-ink)] lg:flex">
-                    {"->"}
+                    <ButtonArrow />
                   </span>
                 </Link>
               </Reveal>
@@ -193,7 +193,7 @@ export default function ServicesIndex() {
         <Container>
           <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
             <Reveal className="md:col-span-5">
-              <div className="relative overflow-hidden bg-[var(--color-limestone)]" style={{ aspectRatio: "4/3" }}>
+              <div className="relative overflow-hidden" style={{ aspectRatio: "4/3" }}>
                 <Image
                   src={FLOOR_IMAGES.honed}
                   alt="Honed concrete specification sample"

@@ -1492,7 +1492,7 @@ function QuoteDocument({ state, calc }: QuoteDocumentProps) {
         >
           <div>{PHONE_DISPLAY}</div>
           <div>{EMAIL}</div>
-          <div>perthconcretecare.com.au</div>
+          <div>perthconcretepolishing.com.au</div>
         </div>
       </div>
 
@@ -1891,7 +1891,7 @@ function QuoteDocument({ state, calc }: QuoteDocumentProps) {
           lineHeight: 1.5,
         }}
       >
-        Perth Concrete Care · ABN 63 775 263 307 · perthconcretecare.com.au · 0448 483 226
+        Perth Concrete Care · ABN 63 775 263 307 · perthconcretepolishing.com.au · 0448 483 226
         <br />
         This quote is generated on-site and remains an estimate until formally issued and accepted.
       </div>
@@ -2029,7 +2029,7 @@ td.total { font-weight: 700; }
   <div class="contact-info">
     <div>${PHONE_DISPLAY}</div>
     <div>${EMAIL}</div>
-    <div>perthconcretecare.com.au</div>
+    <div>perthconcretepolishing.com.au</div>
   </div>
 </div>
 

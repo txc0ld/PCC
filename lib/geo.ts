@@ -1,12 +1,13 @@
 import { EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/lib/utils";
 
-export const BASE_URL = "https://perthconcretecare.com.au";
+export const BASE_URL = "https://perthconcretepolishing.com.au";
 export const LAST_UPDATED = "2026-05-22";
 export const LAST_UPDATED_DISPLAY = "22 May 2026";
 
 export const BUSINESS = {
   name: "Perth Concrete Care",
   legalName: "Perth Concrete Care",
+  alternateName: "Perth Concrete Polishing",
   abn: "63 775 263 307",
   url: BASE_URL,
   logo: `${BASE_URL}/LOGO.png`,
@@ -15,7 +16,7 @@ export const BUSINESS = {
   phoneHref: PHONE_HREF,
   email: EMAIL,
   description:
-    "Perth Concrete Care provides polished concrete, honed concrete, grind and seal, and epoxy flooring for residential, commercial, hospitality, and industrial projects across Perth, Western Australia.",
+    "Perth Concrete Care provides concrete polishing, polished concrete, honed concrete, grind and seal, and epoxy flooring for residential, commercial, hospitality, and industrial projects across Perth, Western Australia.",
   areaServed: [
     "Perth",
     "Fremantle",
@@ -119,7 +120,6 @@ export const SITE_ROUTES = [
   "/work/midland-warehouse",
   "/about",
   "/contact",
-  "/quote",
 ] as const;
 
 export function localBusinessJsonLd() {
@@ -129,6 +129,7 @@ export function localBusinessJsonLd() {
     "@id": `${BASE_URL}/#business`,
     name: BUSINESS.name,
     legalName: BUSINESS.legalName,
+    alternateName: BUSINESS.alternateName,
     url: BUSINESS.url,
     logo: BUSINESS.logo,
     image: BUSINESS.image,

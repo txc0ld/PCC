@@ -10,27 +10,27 @@ Perth Concrete Care is a Perth, Western Australia concrete flooring business pro
 - ABN: 63 775 263 307
 - Phone: 0448 483 226
 - Email: sales@perthconcretecare.com.au
-- Website: https://perthconcretecare.com.au/
-- Quote action: https://perthconcretecare.com.au/contact#quote
-- Agent catalog: https://perthconcretecare.com.au/api/agent/catalog
+- Website: https://perthconcretepolishing.com.au/
+- Quote action: https://perthconcretepolishing.com.au/contact#quote
+- Agent catalog: https://perthconcretepolishing.com.au/api/agent/catalog
 
 ## Service answer objects
 
 ### What polished concrete service does Perth Concrete Care provide?
 
-Polished concrete is best for internal floors where long service life, light return, and architectural finish matter. Perth Concrete Care mechanically grinds, densifies, refines, guards, and hands over the floor with maintenance advice matched to the slab and room use. Typical guide range: $160 - $220 per m2.
+Polished concrete is best for internal floors where long service life, light return, and architectural finish matter. Perth Concrete Care mechanically grinds, densifies, refines, guards, and hands over the floor with maintenance advice matched to the slab and room use. Typical guide range: $160 - $220 per square metre.
 
 ### What honed concrete service does Perth Concrete Care provide?
 
-Honed concrete is a low-glare matte or satin finish for outdoor, transitional, and tactile concrete floors. It exposes aggregate, refines scratches, and uses suitable protection for areas where traction, weather, and restrained appearance matter. Typical guide range: $120 - $160 per m2.
+Honed concrete is a low-glare matte or satin finish for outdoor, transitional, and tactile concrete floors. It exposes aggregate, refines scratches, and uses suitable protection for areas where traction, weather, and restrained appearance matter. Typical guide range: $120 - $160 per square metre.
 
 ### What is grind and seal concrete flooring?
 
-Grind and seal is a practical concrete floor system where the slab is mechanically ground and protected with a sealer or coating. It suits warehouses, workshops, and back-of-house spaces that need improved cleanability and efficient return to service. Typical guide range: $65 - $95 per m2.
+Grind and seal is a practical concrete floor system where the slab is mechanically ground and protected with a sealer or coating. It suits warehouses, workshops, and back-of-house spaces that need improved cleanability and efficient return to service. Typical guide range: $65 - $95 per square metre.
 
 ### Does Perth Concrete Care provide epoxy flooring?
 
-Yes. Perth Concrete Care provides epoxy and polyaspartic coating systems for Perth garages, workshops, commercial kitchens, plant rooms, marked work zones, and other working floors that need cleanability, chemical resistance, slip awareness, or fast return to use. Ultra Flake is typically $75 - $85 per m2 and Hyper Flake is typically $90 - $100 per m2.
+Yes. Perth Concrete Care provides epoxy and polyaspartic coating systems for Perth garages, workshops, commercial kitchens, plant rooms, marked work zones, and other working floors that need cleanability, chemical resistance, slip awareness, or fast return to use. Ultra Flake is typically $75 - $85 per square metre and Hyper Flake is typically $90 - $100 per square metre.
 
 ## Common questions
 
@@ -44,7 +44,7 @@ Mechanical polish refines and hardens the concrete itself, while grind and seal 
 
 ### How should a quote request be made?
 
-Use https://perthconcretecare.com.au/contact#quote or email sales@perthconcretecare.com.au. Helpful quote inputs include suburb, approximate floor area, finish interest, photos or video of the slab, timing, access constraints, whether the slab is new or existing, and required handover date.
+Use https://perthconcretepolishing.com.au/contact#quote or email sales@perthconcretecare.com.au. Helpful quote inputs include suburb, approximate floor area, finish interest, photos or video of the slab, timing, access constraints, whether the slab is new or existing, and required handover date.
 
 ## Project examples
 

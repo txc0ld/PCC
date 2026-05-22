@@ -16,11 +16,11 @@ const faqs = [
   },
   {
     q: "How long does a typical residential floor take?",
-    a: "A 150 to 250 m2 home usually takes around one to two weeks depending on exposure, repairs, edges, coating cure windows, and access around other trades.",
+    a: "A 150 to 250 m² home usually takes around one to two weeks depending on exposure, repairs, edges, coating cure windows, and access around other trades.",
   },
   {
     q: "How much does polished concrete cost in Perth?",
-    a: "As a planning guide, mechanical polished concrete is about $160 to $220 per m2, honed concrete is $120 to $160 per m2, grind and seal is $65 to $95 per m2, and epoxy flake systems start from $75 to $100 per m2. Final pricing follows site inspection.",
+    a: "As a planning guide, mechanical polished concrete is about $160 to $220 per m², honed concrete is $120 to $160 per m², grind and seal is $65 to $95 per m², and epoxy flake systems start from $75 to $100 per m². Final pricing follows site inspection.",
   },
   {
     q: "Does Perth Concrete Care provide epoxy flooring?",

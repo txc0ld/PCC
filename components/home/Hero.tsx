@@ -1,14 +1,18 @@
+import Image from "next/image";
 import { LinkButton } from "@/components/ui/Button";
 
 export function Hero() {
   return (
     <section className="relative min-h-[92svh] overflow-hidden bg-[var(--color-ink)] pt-[var(--nav-h)] text-[var(--color-text-inverse)]">
-      <img
+      <Image
         src="/epoxy/hero-concrete-architecture.jpg"
         alt="Architectural concrete interior with a ribbed ceiling, bright vertical screen, and polished concrete floor"
+        fill
+        priority
+        sizes="100vw"
         className="absolute inset-0 h-full w-full object-cover"
       />
-      <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(90deg,rgba(16,16,14,0.82)_0%,rgba(16,16,14,0.48)_44%,rgba(16,16,14,0.12)_100%)]" />
+      <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgba(16,16,14,0.26)_0%,rgba(16,16,14,0.50)_42%,rgba(16,16,14,0.88)_100%)] md:bg-[linear-gradient(90deg,rgba(16,16,14,0.82)_0%,rgba(16,16,14,0.48)_44%,rgba(16,16,14,0.12)_100%)]" />
 
       <div className="container-pcc relative z-10 flex min-h-[calc(92svh-var(--nav-h))] items-end py-12 md:py-16">
         <div className="max-w-[960px]">

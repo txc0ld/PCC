@@ -19,7 +19,7 @@ const projects: Array<{
     sector: "Residential",
     location: "Cottesloe",
     finish: "Salt and pepper mechanical polish",
-    metric: "180 m2",
+    metric: "180 m²",
     image: FLOOR_IMAGES.workCottesloe,
   },
   {
@@ -104,13 +104,13 @@ function Project({
       }`}
     >
       <figure>
-        <div className="relative overflow-hidden bg-[var(--color-charcoal)]" style={{ aspectRatio: large ? "16/11" : "16/10" }}>
+        <div className="relative overflow-hidden" style={{ aspectRatio: "3/2" }}>
           <Image
             src={project.image}
             alt={`${project.title} concrete flooring project`}
             fill
             sizes={large ? "(min-width: 1024px) 58vw, 100vw" : "(min-width: 1024px) 42vw, 100vw"}
-            className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-default)] group-hover:scale-[1.02]"
+            className="object-cover transition-transform duration-[var(--duration-slow)] ease-[var(--ease-default)] group-hover:scale-[1.02]"
           />
         </div>
         <figcaption className="mt-3 flex items-center justify-between gap-4 text-[var(--color-text-inverse)]/56">

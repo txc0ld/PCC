@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
@@ -87,9 +88,11 @@ export function BeforeAfter() {
             className="relative mt-12 w-full select-none overflow-hidden border border-[var(--hairline-dark)] bg-[#4f4a42] aspect-[4/5] md:aspect-[16/9] xl:aspect-[21/9]"
             style={{ cursor: "col-resize" }}
           >
-            <img
+            <Image
               src="/examples/before-1%20(1).avif"
               alt="Concrete slab before finishing"
+              fill
+              sizes="(min-width: 1024px) 1248px, 100vw"
               className="absolute inset-0 h-full w-full object-cover"
               draggable={false}
             />
@@ -100,9 +103,11 @@ export function BeforeAfter() {
                 transition: dragging ? "none" : "clip-path 200ms cubic-bezier(0.4,0,0.2,1)",
               }}
             >
-              <img
+              <Image
                 src="/examples/after-1.avif"
                 alt="Concrete slab after finishing"
+                fill
+                sizes="(min-width: 1024px) 1248px, 100vw"
                 className="h-full w-full object-cover"
                 draggable={false}
               />
