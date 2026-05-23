@@ -9,6 +9,11 @@ import { cn, EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/lib/utils";
 type FieldKey = "name" | "suburb" | "area" | "finish" | "description" | "email" | "phone";
 type State = Record<FieldKey, string>;
 
+const MAX_ATTACHMENTS = 5;
+const MAX_TOTAL_UPLOAD_BYTES = 3.5 * 1024 * 1024;
+const MAX_COMPRESSED_FILE_BYTES = 900 * 1024;
+const MAX_IMAGE_EDGE = 1600;
+
 const initial: State = {
   name: "",
   suburb: "",
@@ -24,6 +29,10 @@ export function QuoteForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [contactError, setContactError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [photos, setPhotos] = useState<File[]>([]);
+  const [photoMessage, setPhotoMessage] = useState("");
+  const [photoError, setPhotoError] = useState("");
+  const [photoProcessing, setPhotoProcessing] = useState(false);
 
   const onChange =
     (key: FieldKey) =>
@@ -34,6 +43,51 @@ export function QuoteForm() {
         return { ...current, [key]: event.target.value };
       });
 
+  const onPhotosChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files ?? []);
+    setPhotoMessage("");
+    setPhotoError("");
+    setPhotoProcessing(files.length > 0);
+    if (status === "error") setStatus("idle");
+
+    if (files.length > MAX_ATTACHMENTS) {
+      const message = `Attach up to ${MAX_ATTACHMENTS} photos.`;
+      setPhotos([]);
+      setPhotoError(message);
+      setPhotoProcessing(false);
+      event.currentTarget.value = "";
+      return;
+    }
+
+    try {
+      const processed = await Promise.all(files.map(preparePhoto));
+      const totalBytes = processed.reduce((sum, file) => sum + file.size, 0);
+
+      if (totalBytes > MAX_TOTAL_UPLOAD_BYTES) {
+        const message =
+          "Those photos are still too large to send through the website. Add fewer photos or email the full-resolution files directly.";
+        setPhotos([]);
+        setPhotoError(message);
+        event.currentTarget.value = "";
+        return;
+      }
+
+      setPhotos(processed);
+      setPhotoMessage(
+        processed.length
+          ? `${processed.length} photo${processed.length === 1 ? "" : "s"} ready, ${formatBytes(totalBytes)} total.`
+          : ""
+      );
+    } catch {
+      const message = "One of those images could not be prepared. Try JPEG, PNG, WebP, AVIF, HEIC or HEIF.";
+      setPhotos([]);
+      setPhotoError(message);
+      event.currentTarget.value = "";
+    } finally {
+      setPhotoProcessing(false);
+    }
+  };
+
   const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -42,13 +96,30 @@ export function QuoteForm() {
       return;
     }
 
+    if (photoError) {
+      setStatus("error");
+      setErrorMessage(photoError);
+      return;
+    }
+
     setStatus("sending");
     setErrorMessage("");
 
     try {
+      const formData = new FormData();
+      formData.set("company", "");
+      formData.set("name", values.name);
+      formData.set("suburb", values.suburb);
+      formData.set("area", values.area);
+      formData.set("finish", values.finish);
+      formData.set("email", values.email);
+      formData.set("phone", values.phone);
+      formData.set("description", values.description);
+      photos.forEach((photo) => formData.append("photos", photo, photo.name));
+
       const response = await fetch("/api/quote", {
         method: "POST",
-        body: new FormData(event.currentTarget),
+        body: formData,
       });
       const payload = (await response.json().catch(() => ({}))) as { error?: string };
 
@@ -137,14 +208,21 @@ export function QuoteForm() {
                   </span>
                   <input
                     type="file"
-                    name="photos"
                     accept="image/*,.heic,.heif"
                     multiple
+                    onChange={onPhotosChange}
                     className="text-[13px] text-[var(--color-text-inverse)]/70 file:mr-4 file:border-0 file:bg-[var(--color-pcc-green)] file:px-3 file:py-2 file:text-[12px] file:font-semibold file:text-[var(--color-ink)]"
                   />
                   <span className="t-caption text-[var(--color-text-inverse)]/45">
-                    Up to 5 photos, 8 MB each.
+                    Up to 5 photos. Images are compressed before sending.
                   </span>
+                  {photoProcessing && (
+                    <span className="t-caption text-[var(--color-text-inverse)]/55">Preparing photos...</span>
+                  )}
+                  {photoMessage && !photoProcessing && (
+                    <span className="t-caption text-[var(--color-pcc-green)]">{photoMessage}</span>
+                  )}
+                  {photoError && <span className="t-caption text-[var(--color-oxide)]">{photoError}</span>}
                 </label>
                 {status === "error" && (
                   <p className="t-caption text-[var(--color-oxide)] md:col-span-6" role="alert">
@@ -153,8 +231,8 @@ export function QuoteForm() {
                 )}
 
                 <div className="mt-5 flex flex-col gap-4 md:col-span-6 md:flex-row md:items-center">
-                  <Button type="submit" variant="accent" disabled={status === "sending"}>
-                    {status === "sending" ? "Sending..." : "Request Quote"}
+                  <Button type="submit" variant="accent" disabled={status === "sending" || photoProcessing}>
+                    {photoProcessing ? "Preparing photos..." : status === "sending" ? "Sending..." : "Request Quote"}
                   </Button>
                   <p className="t-caption max-w-[38ch] text-[var(--color-text-inverse)]/55">
                     Include photos, access notes, traffic type, timing, and whether the slab is new or existing.
@@ -277,4 +355,81 @@ function SelectField({
       </select>
     </label>
   );
+}
+
+async function preparePhoto(file: File) {
+  if (!isAcceptedImage(file)) {
+    throw new Error("Unsupported image type");
+  }
+
+  if (!canCompressInBrowser(file)) {
+    return file;
+  }
+
+  const bitmap = await createImageBitmap(file);
+  const scale = Math.min(1, MAX_IMAGE_EDGE / Math.max(bitmap.width, bitmap.height));
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+  canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+  const context = canvas.getContext("2d");
+
+  if (!context) {
+    bitmap.close();
+    return file;
+  }
+
+  context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+  bitmap.close();
+
+  for (const quality of [0.82, 0.72, 0.62, 0.52, 0.42]) {
+    const blob = await canvasToBlob(canvas, quality);
+    if (blob.size <= MAX_COMPRESSED_FILE_BYTES || quality === 0.42) {
+      return new File([blob], `${stripExtension(file.name)}.jpg`, {
+        type: "image/jpeg",
+        lastModified: Date.now(),
+      });
+    }
+  }
+
+  return file;
+}
+
+function canCompressInBrowser(file: File) {
+  return ["image/avif", "image/jpeg", "image/jpg", "image/png", "image/webp"].includes(file.type);
+}
+
+function isAcceptedImage(file: File) {
+  const name = file.name.toLowerCase();
+  return (
+    file.type.startsWith("image/") ||
+    name.endsWith(".heic") ||
+    name.endsWith(".heif") ||
+    name.endsWith(".avif") ||
+    name.endsWith(".jpg") ||
+    name.endsWith(".jpeg") ||
+    name.endsWith(".png") ||
+    name.endsWith(".webp")
+  );
+}
+
+function canvasToBlob(canvas: HTMLCanvasElement, quality: number) {
+  return new Promise<Blob>((resolve, reject) => {
+    canvas.toBlob(
+      (blob) => {
+        if (blob) resolve(blob);
+        else reject(new Error("Image compression failed"));
+      },
+      "image/jpeg",
+      quality
+    );
+  });
+}
+
+function stripExtension(name: string) {
+  return name.replace(/\.[^.]+$/, "") || "quote-photo";
+}
+
+function formatBytes(bytes: number) {
+  if (bytes < 1024 * 1024) return `${Math.max(1, Math.round(bytes / 1024))} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }

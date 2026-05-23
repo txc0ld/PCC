@@ -7,8 +7,8 @@ export const dynamic = "force-dynamic";
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
 const DEFAULT_FROM = "Perth Commercial Flooring <quotes@perthcommercialfloors.com.au>";
 const MAX_ATTACHMENTS = 5;
-const MAX_FILE_BYTES = 8 * 1024 * 1024;
-const MAX_TOTAL_BYTES = 24 * 1024 * 1024;
+const MAX_FILE_BYTES = 1.25 * 1024 * 1024;
+const MAX_TOTAL_BYTES = 4 * 1024 * 1024;
 
 const allowedFileTypes = new Set([
   "image/avif",
@@ -175,12 +175,12 @@ function validatePhotos(files: File[]) {
   const totalBytes = files.reduce((sum, file) => sum + file.size, 0);
 
   if (totalBytes > MAX_TOTAL_BYTES) {
-    return "Photo attachments must be 24 MB total or less.";
+    return "Photo attachments must be 4 MB total or less.";
   }
 
   for (const file of files) {
     if (file.size > MAX_FILE_BYTES) {
-      return `${file.name} is larger than 8 MB.`;
+      return `${file.name} is larger than 1.25 MB after compression.`;
     }
 
     if (file.type && !allowedFileTypes.has(file.type)) {

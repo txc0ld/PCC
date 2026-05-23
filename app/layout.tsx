@@ -39,6 +39,10 @@ export const metadata: Metadata = {
   creator: BUSINESS.name,
   publisher: BUSINESS.name,
   category: "Concrete flooring contractor",
+  icons: {
+    icon: [{ url: "/LOGO.png", type: "image/png" }],
+    apple: [{ url: "/LOGO.png", type: "image/png" }],
+  },
   alternates: { canonical: "/" },
   formatDetection: {
     telephone: false,
