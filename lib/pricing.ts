@@ -13,14 +13,14 @@ export interface PricingItem {
 export const PRICING: Record<string, PricingItem[]> = {
   exposure: [
     { id: 'ex_cream', name: 'Cream', desc: 'No aggregate exposed. Smooth cement-paste finish, modern minimal look.', unit: 'm²', min: 50, default: 55, max: 60 },
-    { id: 'ex_sp', name: 'Salt & Pepper', desc: 'Light grind. Fine speckled aggregate visible. Most popular for residential.', unit: 'm²', min: 60, default: 65, max: 70 },
+    { id: 'ex_sp', name: 'Salt & Pepper', desc: 'Light grind. Fine speckled aggregate visible. Popular for showrooms, retail and hospitality.', unit: 'm²', min: 60, default: 65, max: 70 },
     { id: 'ex_med', name: 'Medium Exposure', desc: 'Mix of fine and medium aggregate revealed. Bolder, textural look.', unit: 'm²', min: 70, default: 75, max: 80 },
     { id: 'ex_full', name: 'Full Exposure', desc: 'Deep grind. Full aggregate visible — terrazzo-like statement floor.', unit: 'm²', min: 80, default: 85, max: 90 },
   ],
   grit: [
     { id: 'gt_basic', name: 'Basic Grind', desc: 'No polish — raw ground finish. Industrial / warehouse aesthetic.', unit: 'm²', min: 0, default: 0, max: 0 },
     { id: 'gt_honed', name: 'Honed (120 Grit)', desc: 'Matte / satin. No reflection. Refined natural concrete look.', unit: 'm²', min: 15, default: 20, max: 25 },
-    { id: 'gt_400', name: '400 Grit', desc: 'Low sheen / soft satin. Most common residential finish.', unit: 'm²', min: 35, default: 40, max: 45 },
+    { id: 'gt_400', name: '400 Grit', desc: 'Low sheen / soft satin. Common low-sheen commercial finish.', unit: 'm²', min: 35, default: 40, max: 45 },
     { id: 'gt_800', name: '800 Grit', desc: 'Semi-gloss. Light reflection. Modern feature floors.', unit: 'm²', min: 45, default: 50, max: 55 },
     { id: 'gt_1500', name: '1500 Grit', desc: 'High gloss. Strong reflection and clarity.', unit: 'm²', min: 55, default: 60, max: 70 },
     { id: 'gt_3000', name: '3000 Grit', desc: 'Mirror finish. Premium showstopper. Slab condition must suit.', unit: 'm²', min: 70, default: 80, max: 95 },
@@ -70,7 +70,7 @@ export const PRICING: Record<string, PricingItem[]> = {
     { id: 'dr_max', name: 'Dust Removal — Max', desc: '20+ bags of grinding waste.', unit: 'Job', min: 1000, default: 1000, max: 1000 },
   ],
   epoxyFlake: [
-    { id: 'ef_ultra', name: 'Ultra Flake', desc: 'Durable epoxy flake system for garages, workshops and alfresco areas.', unit: 'm²', min: 75, default: 80, max: 85 },
+    { id: 'ef_ultra', name: 'Ultra Flake', desc: 'Durable epoxy flake system for workshops, amenities and plant rooms.', unit: 'm²', min: 75, default: 80, max: 85 },
     { id: 'ef_hyper', name: 'Hyper Flake', desc: 'Premium dense-blend epoxy flake system with stronger contrast and depth.', unit: 'm²', min: 90, default: 95, max: 100 },
   ],
 };

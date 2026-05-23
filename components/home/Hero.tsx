@@ -17,17 +17,16 @@ export function Hero() {
       <div className="container-pcc relative z-10 flex min-h-[calc(92svh-var(--nav-h))] items-end py-12 md:py-16">
         <div className="max-w-[960px]">
           <p className="t-eyebrow max-w-[30ch] text-[var(--color-text-inverse)]/62 md:max-w-none">
-            Polished concrete and epoxy flooring / Perth WA
+            Commercial flooring / Perth WA
           </p>
           <h1 className="mt-4 max-w-[13ch] font-[var(--font-display)] text-[clamp(42px,8.2vw,108px)] font-extrabold leading-[0.94] tracking-normal text-[var(--color-text-inverse)]">
-            Floors specified like architecture.
+            Commercial floors built for traffic.
           </h1>
           <p className="hero-copy mt-5 text-[16px] leading-[1.65] text-[var(--color-text-inverse)]/78 md:text-[18px]">
-            <span className="block md:inline">Concrete care for homes, </span>
-            <span className="block md:inline">showrooms, hospitality spaces, </span>
-            <span className="block md:inline">and workshops, </span>
-            <span className="block md:inline">with finishes that look deliberate </span>
-            <span className="block md:inline">and wear honestly.</span>
+            <span className="block md:inline">Polished concrete, grind and seal, </span>
+            <span className="block md:inline">and epoxy coating systems for warehouses, </span>
+            <span className="block md:inline">showrooms, hospitality, workshops, </span>
+            <span className="block md:inline">plant rooms, and high-traffic Perth sites.</span>
           </p>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
             <LinkButton href="/contact#quote" variant="accent">

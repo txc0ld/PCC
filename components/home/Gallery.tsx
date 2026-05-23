@@ -20,8 +20,8 @@ export function Gallery() {
                 Project evidence, not stock flooring.
               </h2>
               <p className="t-body max-w-[58ch] text-[var(--color-text-muted)] md:col-span-6 md:col-start-7">
-                Recent polished concrete, honed concrete, exposed aggregate and
-                epoxy coating examples from Perth homes and working spaces.
+                Recent polished concrete, honed concrete, grind and seal, and
+                epoxy coating examples from Perth commercial and industrial spaces.
               </p>
             </header>
           </Reveal>
@@ -53,7 +53,7 @@ function WorkGrid({
               <div className="relative overflow-hidden" style={{ aspectRatio: "3/2" }}>
                 <Image
                   src={src}
-                  alt={`${name} by Perth Concrete Care`}
+                  alt={`${name} commercial flooring by Perth Commercial Flooring`}
                   fill
                   sizes={i === 0 || i === 5 ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 100vw"}
                   className="object-cover transition-transform duration-[var(--duration-slow)] ease-[var(--ease-default)] group-hover:scale-[1.03]"

@@ -3,9 +3,9 @@ import { Reveal } from "@/components/ui/Reveal";
 
 const stories = [
   {
-    quote: "They talked us out of a glossier finish because the afternoon sun would have made it too reflective.",
+    quote: "They specified a lower-sheen polish that worked under strong showroom lighting and still felt premium.",
     name: "Anna Richardson",
-    role: "Architect, Cottesloe residence",
+    role: "Commercial designer, showroom fitout",
   },
   {
     quote: "The warehouse floor now cleans properly and the line marking has stayed sharp through forklift traffic.",

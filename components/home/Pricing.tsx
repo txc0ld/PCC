@@ -3,11 +3,11 @@ import { LinkButton } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 
 const primaryPrices = [
-  ["Ultra Flake epoxy", "$75 - $85", "Garages, workshops, alfresco areas"],
-  ["Hyper Flake epoxy", "$90 - $100", "Premium blend for feature garages and commercial spaces"],
+  ["Ultra Flake epoxy", "$75 - $85", "Workshops, amenities, plant rooms and service areas"],
+  ["Hyper Flake epoxy", "$90 - $100", "Premium blend for showrooms, retail and commercial spaces"],
   ["Grind and seal", "$65 - $95", "Working floors, warehouses and back-of-house"],
-  ["Honed concrete", "$120 - $160", "Low-glare homes, cafes and outdoor rooms"],
-  ["Mechanical polish", "$160 - $220", "Homes, showrooms, retail and hospitality"],
+  ["Honed concrete", "$120 - $160", "Low-glare hospitality, entries and commercial courtyards"],
+  ["Mechanical polish", "$160 - $220", "Showrooms, retail, hospitality and offices"],
 ] as const;
 
 const quoteFactors = [
@@ -66,7 +66,7 @@ export function Pricing() {
                 <p className="text-[clamp(24px,2vw,34px)] font-extrabold leading-none text-[var(--color-text-primary)]">
                   {range}
                   <span className="ml-2 align-middle text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--color-text-muted)]">
-                    / m²
+                    / m2
                   </span>
                 </p>
                 <p className="t-body-sm text-[var(--color-text-muted)]">{bestFor}</p>

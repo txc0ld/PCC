@@ -73,7 +73,7 @@
     text-rendering: optimizeLegibility;
     scroll-behavior: auto;
     overflow-x: hidden;
-    overflow-y: auto;
+    min-height: 100%;
   }
 
   body {
@@ -82,9 +82,9 @@
     line-height: 1.6;
     color: var(--color-text-primary);
     background: var(--color-paper);
-    overscroll-behavior-y: none;
     overflow-x: hidden;
-    overflow-y: auto;
+    min-height: 100%;
+    -webkit-overflow-scrolling: touch;
   }
 
   ::selection {

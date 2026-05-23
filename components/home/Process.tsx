@@ -28,9 +28,9 @@ export function Process() {
             </div>
             <Reveal stagger={160} className="md:col-span-5 md:col-start-8 md:pt-8">
               <p className="t-body text-[var(--color-text-muted)]">
-                Most visible failures are process failures: wrong system,
-                rushed cure windows, poor edge detail, or a finish that ignores
-                the room's actual use.
+                Most commercial floor failures are process failures: wrong
+                surface profile, rushed cure windows, weak joint planning, or a
+                finish that ignores traffic, cleaning, and downtime.
               </p>
             </Reveal>
           </div>

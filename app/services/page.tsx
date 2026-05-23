@@ -1,11 +1,26 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ButtonArrow, LinkButton } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import { StructuredData } from "@/components/StructuredData";
+import { absoluteUrl, breadcrumbJsonLd, webPageJsonLd } from "@/lib/geo";
 import { FLOOR_IMAGES } from "@/lib/images";
 
-export const metadata = { title: "Services" };
+export const metadata: Metadata = {
+  title: "Commercial Flooring Services Perth",
+  description:
+    "Compare commercial polished concrete, honed concrete, grind and seal, and epoxy coating systems for Perth warehouses, showrooms, retail, hospitality, workshops, and plant rooms.",
+  alternates: { canonical: "/services" },
+  openGraph: {
+    title: "Commercial Flooring Services Perth",
+    description:
+      "Compare commercial polished concrete, honed concrete, grind and seal, and epoxy coating systems across Perth.",
+    url: absoluteUrl("/services"),
+    images: [{ url: FLOOR_IMAGES.honed, width: 1200, height: 900, alt: "Honed concrete finish sample" }],
+  },
+};
 
 const services: Array<{
   slug: string;
@@ -19,7 +34,7 @@ const services: Array<{
     slug: "polished",
     title: "Polished concrete",
     desc: "Mechanically ground, densified, and refined for satin to high-gloss internal floors.",
-    suitable: "Architectural homes, retail floors, showrooms, hospitality",
+    suitable: "Retail floors, showrooms, hospitality, commercial offices",
     spec: "Full mechanical polish",
     image: FLOOR_IMAGES.saltPepper,
   },
@@ -27,7 +42,7 @@ const services: Array<{
     slug: "honed",
     title: "Honed concrete",
     desc: "Matte or satin finishes with natural aggregate character and a quieter feel underfoot.",
-    suitable: "Alfresco spaces, homes, cafes, low-glare interiors",
+    suitable: "Cafes, retail entries, hospitality, low-glare interiors",
     spec: "Honed and guarded",
     image: FLOOR_IMAGES.honed,
   },
@@ -42,8 +57,8 @@ const services: Array<{
   {
     slug: "epoxy",
     title: "Epoxy coatings",
-    desc: "Seamless epoxy and polyaspartic systems for garages, workshops, and commercial floors.",
-    suitable: "Garages, plant rooms, food prep, marked work zones",
+    desc: "Seamless epoxy and polyaspartic systems for warehouses, workshops, plant rooms, and commercial floors.",
+    suitable: "Workshops, plant rooms, food prep, marked work zones",
     spec: "Resin coating system",
     image: FLOOR_IMAGES.epoxyGraphite,
   },
@@ -74,6 +89,22 @@ const comparisons = [
 export default function ServicesIndex() {
   return (
     <>
+      <StructuredData
+        data={[
+          webPageJsonLd({
+            path: "/services",
+            name: "Commercial Flooring Services Perth",
+            description:
+              "A guide to commercial polished concrete, honed concrete, grind and seal, and epoxy coating systems for Perth projects.",
+            type: "CollectionPage",
+            image: FLOOR_IMAGES.honed,
+          }),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+          ]),
+        ]}
+      />
       <header className="bg-[var(--color-cream)] pb-14 pt-[calc(var(--nav-h)+72px)] md:pb-20 md:pt-[calc(var(--nav-h)+112px)]">
         <Container>
           <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:items-end">
@@ -83,7 +114,7 @@ export default function ServicesIndex() {
               </Reveal>
               <Reveal stagger={80}>
                 <h1 className="t-display-md mt-4 max-w-[18ch] text-[var(--color-text-primary)]">
-                  Concrete flooring systems chosen from the slab up.
+                  Commercial flooring systems chosen from the slab up.
                 </h1>
               </Reveal>
             </div>

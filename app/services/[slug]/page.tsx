@@ -6,7 +6,14 @@ import { LinkButton } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { StructuredData } from "@/components/StructuredData";
-import { GEO_SERVICES, LAST_UPDATED_DISPLAY, serviceJsonLd } from "@/lib/geo";
+import {
+  absoluteUrl,
+  breadcrumbJsonLd,
+  GEO_SERVICES,
+  LAST_UPDATED_DISPLAY,
+  serviceJsonLd,
+  webPageJsonLd,
+} from "@/lib/geo";
 import { FLOOR_IMAGES, HYPER_FLAKE_IMAGES, POLISHED_CONCRETE_IMAGES, ULTRA_FLAKE_IMAGES } from "@/lib/images";
 
 type Svc = {
@@ -28,12 +35,12 @@ const db: Record<string, Svc> = {
     lede: "Mechanically refined internal concrete with long service life and a natural finish.",
     whatItIs:
       "We grind the slab with diamond tooling, densify it chemically so the concrete becomes harder, then polish through the specified grit sequence. The reflection comes from the concrete itself, not a film sitting on top.",
-    bestFor: ["Homes", "Showrooms", "Hospitality", "Retail"],
-    priceRange: "$160 - $220 / m²",
+    bestFor: ["Showrooms", "Retail", "Hospitality", "Commercial offices"],
+    priceRange: "$160 - $220 / m2",
     image: FLOOR_IMAGES.saltPepper,
     outcome: "A clean architectural floor with controlled aggregate exposure, better light return, and no topical coating to peel.",
     process: ["Slab inspection and exposure sample", "Progressive metal-bond grinding", "Grout, densifier, and edge detailing", "Resin polishing to selected sheen", "Guard application and handover"],
-    options: ["Salt and pepper, partial, or full exposure", "Matte, satin, or high-gloss sheen", "Joint treatment and edge refinement", "Maintenance plan for residential or commercial use"],
+    options: ["Salt and pepper, partial, or full exposure", "Matte, satin, or high-gloss sheen", "Joint treatment and edge refinement", "Maintenance plan for commercial cleaning and traffic"],
     care: "Clean with pH-neutral products, avoid harsh acids, and use walk-off mats where sand is tracked inside.",
   },
   honed: {
@@ -41,8 +48,8 @@ const db: Record<string, Svc> = {
     lede: "A matte or satin concrete finish with tactile aggregate character and low glare.",
     whatItIs:
       "We grind to the specified exposure and stop at a quieter grit level, then protect the floor with a penetrating guard. It suits spaces that need texture, restraint, and natural variation.",
-    bestFor: ["Homes", "Cafes", "Outdoor rooms", "Pool surrounds"],
-    priceRange: "$120 - $160 / m²",
+    bestFor: ["Cafes", "Retail entries", "Courtyards", "Low-glare commercial interiors"],
+    priceRange: "$120 - $160 / m2",
     image: FLOOR_IMAGES.honed,
     outcome: "A softer concrete surface with visible aggregate, low reflection, and a natural feel underfoot.",
     process: ["Review slip, drainage, and exposure needs", "Cut to the selected aggregate level", "Refine scratches through the honing sequence", "Apply suitable penetrating protection", "Confirm cleaning method and reseal cycle"],
@@ -55,7 +62,7 @@ const db: Record<string, Svc> = {
     whatItIs:
       "A controlled grind cleans and flattens the floor before a primer and high-wear sealer system are applied. It is efficient for large working floors and back-of-house spaces.",
     bestFor: ["Warehouses", "Workshops", "Back-of-house retail"],
-    priceRange: "$65 - $95 / m²",
+    priceRange: "$65 - $95 / m2",
     image: FLOOR_IMAGES.workGrindSeal,
     outcome: "A cost-effective concrete finish with improved cleanability, clearer light, and a sacrificial coating that can be refreshed.",
     process: ["Check contamination, cracks, and coating history", "Mechanical grind and floor preparation", "Repair local defects where required", "Apply primer and sealer system", "Confirm cure time before return to service"],
@@ -64,11 +71,11 @@ const db: Record<string, Svc> = {
   },
   epoxy: {
     title: "Epoxy coatings",
-    lede: "Seamless resin flooring for harder-working commercial, garage, and workshop surfaces.",
+    lede: "Seamless resin flooring for harder-working commercial, warehouse, and workshop surfaces.",
     whatItIs:
       "We mechanically prepare the slab, apply primer, build the epoxy layer, and finish with a suitable top coat. Systems can be solid colour, flake, marked, or specified for chemical resistance.",
-    bestFor: ["Garages", "Workshops", "Food prep areas", "Plant rooms"],
-    priceRange: "$75 - $100 / m²",
+    bestFor: ["Warehouses", "Workshops", "Food prep areas", "Plant rooms"],
+    priceRange: "$75 - $100 / m2",
     image: FLOOR_IMAGES.epoxyGraphite,
     outcome: "A sealed resin floor that handles heavier wear, easier cleaning, and clear zoning or colour requirements.",
     process: ["Moisture, contamination, and adhesion checks", "Diamond grind or shot-blast preparation", "Crack repair and joint planning", "Primer, body coat, and broadcast where specified", "Top coat, cure window, and line marking"],
@@ -86,7 +93,23 @@ export async function generateMetadata(props: {
 }): Promise<Metadata> {
   const { slug } = await props.params;
   const svc = db[slug];
-  return { title: svc ? svc.title : "Service" };
+  if (!svc) return { title: "Service" };
+
+  const description = `${svc.lede} Perth Commercial Flooring specifies ${svc.title.toLowerCase()} for ${svc.bestFor
+    .join(", ")
+    .toLowerCase()} across Perth. Guide range ${svc.priceRange}.`;
+
+  return {
+    title: `${svc.title} Perth`,
+    description,
+    alternates: { canonical: `/services/${slug}` },
+    openGraph: {
+      title: `${svc.title} Perth`,
+      description,
+      url: absoluteUrl(`/services/${slug}`),
+      images: [{ url: svc.image, width: 1200, height: 900, alt: `${svc.title} Perth example floor` }],
+    },
+  };
 }
 
 export default async function ServiceDetail(props: {
@@ -97,10 +120,24 @@ export default async function ServiceDetail(props: {
   if (!svc) notFound();
   const structuredData = serviceJsonLd(slug);
   const answerObject = GEO_SERVICES.find((service) => service.slug === slug)?.answer;
+  const schema = [
+    webPageJsonLd({
+      path: `/services/${slug}`,
+      name: `${svc.title} Perth`,
+      description: answerObject ?? svc.lede,
+      image: svc.image,
+    }),
+    breadcrumbJsonLd([
+      { name: "Home", path: "/" },
+      { name: "Services", path: "/services" },
+      { name: svc.title, path: `/services/${slug}` },
+    ]),
+    ...(structuredData ? [structuredData] : []),
+  ];
 
   return (
     <>
-      {structuredData && <StructuredData data={structuredData} />}
+      <StructuredData data={schema} />
       <header className="bg-[var(--color-cream)] pb-14 pt-[calc(var(--nav-h)+72px)] md:pb-20 md:pt-[calc(var(--nav-h)+112px)]">
         <Container>
           <Reveal>
@@ -332,8 +369,8 @@ function EpoxyColourSection() {
               Popular epoxy flake colours in the Ultra Flake range
             </h2>
             <p className="t-body-sm mt-3 text-[var(--color-text-muted)]">
-              Below are popular flake blends commonly chosen for Perth garages,
-              workshops and alfresco areas. Colours may vary slightly on screens
+              Below are popular flake blends commonly chosen for Perth workshops,
+              warehouses, amenities and plant rooms. Colours may vary slightly on screens
               - we help confirm your choice during the site visit.
             </p>
           </header>
@@ -348,7 +385,7 @@ function EpoxyColourSection() {
             <p className="t-body-sm mt-3 text-[var(--color-text-muted)]">
               Our Hyper Flake blends offer a denser mix and stronger contrast
               for extra depth and a more premium finish - ideal for feature
-              garages, workshops and commercial spaces.
+              showrooms, workshops and commercial spaces.
             </p>
           </header>
         </Reveal>

@@ -10,13 +10,24 @@ import { QuoteForm } from "@/components/home/QuoteForm";
 import { Services } from "@/components/home/Services";
 import { Testimonials } from "@/components/home/Testimonials";
 import { StructuredData } from "@/components/StructuredData";
-import { faqJsonLd } from "@/lib/geo";
+import { faqJsonLd, webPageJsonLd } from "@/lib/geo";
 
 // Homepage order is kept stable for anchor navigation and section indexing.
 export default function HomePage() {
   return (
     <>
-      <StructuredData data={faqJsonLd()} />
+      <StructuredData
+        data={[
+          webPageJsonLd({
+            path: "/",
+            name: "Commercial Flooring Perth",
+            description:
+              "Perth Commercial Flooring installs commercial polished concrete, grind and seal, honed concrete, and epoxy floor coatings for Perth warehouses, showrooms, hospitality venues, workshops, and industrial facilities.",
+            image: "/epoxy/hero-concrete-architecture.jpg",
+          }),
+          faqJsonLd(),
+        ]}
+      />
       <Hero />
       <Services />
       <FeaturedWork />

@@ -12,19 +12,31 @@ const config: NextConfig = {
       {
         source: "/:path*",
         has: [{ type: "host", value: "perthconcretecare.com.au" }],
-        destination: "https://perthconcretepolishing.com.au/:path*",
+        destination: "https://perthcommercialfloors.com.au/:path*",
         permanent: true,
       },
       {
         source: "/:path*",
         has: [{ type: "host", value: "www.perthconcretecare.com.au" }],
-        destination: "https://perthconcretepolishing.com.au/:path*",
+        destination: "https://perthcommercialfloors.com.au/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.perthcommercialfloors.com.au" }],
+        destination: "https://perthcommercialfloors.com.au/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "perthconcretepolishing.com.au" }],
+        destination: "https://perthcommercialfloors.com.au/:path*",
         permanent: true,
       },
       {
         source: "/:path*",
         has: [{ type: "host", value: "www.perthconcretepolishing.com.au" }],
-        destination: "https://perthconcretepolishing.com.au/:path*",
+        destination: "https://perthcommercialfloors.com.au/:path*",
         permanent: true,
       },
     ];

@@ -1,11 +1,26 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ButtonArrow, LinkButton } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import { StructuredData } from "@/components/StructuredData";
+import { absoluteUrl, breadcrumbJsonLd, webPageJsonLd } from "@/lib/geo";
 import { FLOOR_IMAGES } from "@/lib/images";
 
-export const metadata = { title: "Work" };
+export const metadata: Metadata = {
+  title: "Commercial Flooring Projects Perth",
+  description:
+    "View Perth commercial flooring project examples across showrooms, warehouses, hospitality venues, galleries, workshops, grind and seal, polished concrete, and epoxy systems.",
+  alternates: { canonical: "/work" },
+  openGraph: {
+    title: "Commercial Flooring Projects Perth",
+    description:
+      "Project examples from Perth Commercial Flooring across commercial, hospitality, showroom, and industrial floors.",
+    url: absoluteUrl("/work"),
+    images: [{ url: FLOOR_IMAGES.workOsbornePark, width: 1536, height: 1024, alt: "Osborne Park commercial polished concrete showroom" }],
+  },
+};
 
 const projects: Array<{
   slug: string;
@@ -17,25 +32,38 @@ const projects: Array<{
   suburb: string;
   image: string;
 }> = [
-  { slug: "cottesloe-residence", title: "Cottesloe Residence", cat: "Residential", year: "2025", area: "240 m²", finish: "Satin polished concrete", suburb: "Cottesloe", image: FLOOR_IMAGES.workCottesloe },
-  { slug: "osborne-park-showroom", title: "Osborne Park Showroom", cat: "Commercial", year: "2024", area: "620 m²", finish: "Full exposure polish", suburb: "Osborne Park", image: FLOOR_IMAGES.workOsbornePark },
-  { slug: "kewdale-warehouse", title: "Kewdale Warehouse", cat: "Industrial", year: "2024", area: "1,850 m²", finish: "Grind and seal", suburb: "Kewdale", image: FLOOR_IMAGES.workKewdale },
-  { slug: "peppermint-grove-house", title: "Peppermint Grove House", cat: "Residential", year: "2024", area: "310 m²", finish: "Low-glare honed concrete", suburb: "Peppermint Grove", image: FLOOR_IMAGES.workPeppermintGrove },
-  { slug: "north-perth-cafe", title: "North Perth Cafe", cat: "Hospitality", year: "2024", area: "140 m²", finish: "Honed and guarded", suburb: "North Perth", image: FLOOR_IMAGES.workNorthPerthCafe },
-  { slug: "fremantle-loft", title: "Fremantle Loft", cat: "Residential", year: "2023", area: "180 m²", finish: "Salt and pepper polish", suburb: "Fremantle", image: FLOOR_IMAGES.workFremantleLoft },
-  { slug: "subiaco-gallery", title: "Subiaco Gallery", cat: "Commercial", year: "2023", area: "420 m²", finish: "Matte polished concrete", suburb: "Subiaco", image: FLOOR_IMAGES.workSubiacoGallery },
-  { slug: "midland-warehouse", title: "Midland Warehouse", cat: "Industrial", year: "2023", area: "2,400 m²", finish: "Epoxy traffic coating", suburb: "Midland", image: FLOOR_IMAGES.workMidlandWarehouse },
+  { slug: "osborne-park-showroom", title: "Osborne Park Showroom", cat: "Commercial", year: "2024", area: "620 m2", finish: "Full exposure polish", suburb: "Osborne Park", image: FLOOR_IMAGES.workOsbornePark },
+  { slug: "kewdale-warehouse", title: "Kewdale Warehouse", cat: "Industrial", year: "2024", area: "1,850 m2", finish: "Grind and seal", suburb: "Kewdale", image: FLOOR_IMAGES.workKewdale },
+  { slug: "north-perth-cafe", title: "North Perth Cafe", cat: "Hospitality", year: "2024", area: "140 m2", finish: "Honed and guarded", suburb: "North Perth", image: FLOOR_IMAGES.workNorthPerthCafe },
+  { slug: "subiaco-gallery", title: "Subiaco Gallery", cat: "Commercial", year: "2023", area: "420 m2", finish: "Matte polished concrete", suburb: "Subiaco", image: FLOOR_IMAGES.workSubiacoGallery },
+  { slug: "midland-warehouse", title: "Midland Warehouse", cat: "Industrial", year: "2023", area: "2,400 m2", finish: "Epoxy traffic coating", suburb: "Midland", image: FLOOR_IMAGES.workMidlandWarehouse },
 ];
 
 const totals = [
-  ["Residential", "3 homes"],
   ["Commercial and hospitality", "3 sites"],
   ["Industrial", "2 floors"],
+  ["Operational focus", "Staged access"],
 ];
 
 export default function WorkIndex() {
   return (
     <>
+      <StructuredData
+        data={[
+          webPageJsonLd({
+            path: "/work",
+            name: "Commercial Flooring Projects Perth",
+            description:
+              "A project index of commercial polished concrete, honed concrete, grind and seal, and epoxy flooring work completed across Perth.",
+            type: "CollectionPage",
+            image: FLOOR_IMAGES.workOsbornePark,
+          }),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Work", path: "/work" },
+          ]),
+        ]}
+      />
       <header className="bg-[var(--color-cream)] pb-14 pt-[calc(var(--nav-h)+72px)] md:pb-20 md:pt-[calc(var(--nav-h)+112px)]">
         <Container>
           <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:items-end">
@@ -45,14 +73,14 @@ export default function WorkIndex() {
               </Reveal>
               <Reveal stagger={80}>
                 <h1 className="t-display-md mt-4 max-w-[18ch] text-[var(--color-text-primary)]">
-                  Finished floors across homes, showrooms, hospitality, and working sites.
+                  Finished floors across showrooms, hospitality, warehouses, and working sites.
                 </h1>
               </Reveal>
             </div>
             <Reveal stagger={160} className="md:col-span-4">
               <p className="t-body-lg max-w-[34ch] text-[var(--color-text-muted)] md:ml-auto">
-                A project index focused on the practical choices behind each
-                surface: finish, use, traffic, and handover.
+                A commercial project index focused on practical choices:
+                finish, use, traffic, cleaning, downtime, and handover.
               </p>
             </Reveal>
           </div>
@@ -96,7 +124,7 @@ export default function WorkIndex() {
                     <div className="relative aspect-[3/2] overflow-hidden">
                       <Image
                         src={project.image}
-                        alt={`${project.title} concrete flooring project`}
+                        alt={`${project.title} commercial flooring project`}
                         fill
                         sizes="(min-width: 768px) 50vw, 100vw"
                         className="object-cover transition-transform duration-[var(--duration-slow)] ease-[var(--ease-default)] group-hover:scale-[1.02]"
@@ -134,9 +162,9 @@ export default function WorkIndex() {
         <Container>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:items-center">
             <Reveal className="md:col-span-8">
-              <p className="t-eyebrow text-[var(--color-text-inverse)]/55">Your floor</p>
+              <p className="t-eyebrow text-[var(--color-text-inverse)]/55">Your site</p>
               <h2 className="t-display-sm mt-4 max-w-[18ch] text-[var(--color-text-inverse)]">
-                Bring the slab condition, plans, and timing. We will advise the finish.
+                Bring the slab condition, access, traffic, and downtime window. We will advise the system.
               </h2>
             </Reveal>
             <Reveal stagger={120} className="md:col-span-4 md:text-right">

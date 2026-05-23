@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Quote Calculator",
-  description: "On-site quote tool for Perth Concrete Care.",
+  description: "Internal on-site quote tool for Perth Commercial Flooring commercial floor systems.",
   robots: { index: false, follow: false },
 };
 

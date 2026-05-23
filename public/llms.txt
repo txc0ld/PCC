@@ -1,34 +1,41 @@
-# Perth Concrete Care
+# Perth Commercial Flooring
 
-> Perth Concrete Care provides polished concrete, honed concrete, grind and seal, and epoxy flooring for residential, commercial, hospitality, and industrial projects across Perth, Western Australia.
+> Perth Commercial Flooring provides commercial polished concrete, grind and seal, honed concrete, epoxy coatings, polyaspartic top coats, and concrete surface preparation for warehouses, showrooms, retail, hospitality, workshops, plant rooms, and industrial facilities across Perth, Western Australia.
 
-Last updated: 2026-05-22
+Last updated: 2026-05-23
 
 ## Core pages
 
-- Home: https://perthconcretepolishing.com.au/
-- Services: https://perthconcretepolishing.com.au/services
-- Work examples: https://perthconcretepolishing.com.au/work
-- Contact and quote request: https://perthconcretepolishing.com.au/contact#quote
-- Agent-readable catalog: https://perthconcretepolishing.com.au/api/agent/catalog
+- Home: https://perthcommercialfloors.com.au/
+- Commercial flooring services: https://perthcommercialfloors.com.au/services
+- Commercial work examples: https://perthcommercialfloors.com.au/work
+- Contact and quote request: https://perthcommercialfloors.com.au/contact#quote
+- Agent-readable catalog: https://perthcommercialfloors.com.au/api/agent/catalog
+
+## Machine-readable surfaces
+
+- XML sitemap: https://perthcommercialfloors.com.au/sitemap.xml
+- robots.txt with AI crawler access: https://perthcommercialfloors.com.au/robots.txt
+- LLM full reference: https://perthcommercialfloors.com.au/llms-full.txt
+- Quote form endpoint: https://perthcommercialfloors.com.au/api/quote
 
 ## Services
 
-- Polished concrete: https://perthconcretepolishing.com.au/services/polished
-- Honed concrete: https://perthconcretepolishing.com.au/services/honed
-- Grind and seal: https://perthconcretepolishing.com.au/services/grind-seal
-- Epoxy coatings: https://perthconcretepolishing.com.au/services/epoxy
+- Commercial polished concrete: https://perthcommercialfloors.com.au/services/polished
+- Commercial honed concrete: https://perthcommercialfloors.com.au/services/honed
+- Grind and seal concrete: https://perthcommercialfloors.com.au/services/grind-seal
+- Commercial epoxy coatings: https://perthcommercialfloors.com.au/services/epoxy
 
 ## Canonical facts
 
-- Business name: Perth Concrete Care
+- Business name: Perth Commercial Flooring
 - ABN: 63 775 263 307
 - Phone: 0448 483 226
 - Email: sales@perthconcretecare.com.au
-- Service area: Perth metro and surrounding suburbs in Western Australia
-- Primary action: Request Quote at https://perthconcretepolishing.com.au/contact#quote
+- Service area: Perth metro commercial and industrial suburbs in Western Australia
+- Primary action: Request Quote at https://perthcommercialfloors.com.au/contact#quote
 
-## Price guide
+## Commercial price guide
 
 - Ultra Flake epoxy: $75 - $85 per square metre
 - Hyper Flake epoxy: $90 - $100 per square metre
@@ -36,4 +43,4 @@ Last updated: 2026-05-22
 - Honed concrete: $120 - $160 per square metre
 - Mechanical polish: $160 - $220 per square metre
 
-Final pricing depends on site inspection, access, slab condition, repairs, exposure, coating specification, exclusions, GST treatment, and program.
+Final pricing depends on site inspection, access, slab condition, repairs, exposure, coating specification, downtime window, staging, exclusions, GST treatment, and program.

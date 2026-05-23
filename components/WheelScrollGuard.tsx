@@ -10,6 +10,11 @@ function normalizeWheelDelta(event: WheelEvent) {
 
 export function WheelScrollGuard() {
   useEffect(() => {
+    const isFinePointer =
+      window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+    if (!isFinePointer) return;
+
     const unlockScroll = () => {
       document.documentElement.style.overflowY = "auto";
       document.body.style.overflowY = "auto";

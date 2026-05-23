@@ -1,27 +1,56 @@
+import type { Metadata } from "next";
 import { QuoteForm } from "@/components/home/QuoteForm";
 import { LinkButton } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import { StructuredData } from "@/components/StructuredData";
+import { absoluteUrl, breadcrumbJsonLd, webPageJsonLd } from "@/lib/geo";
 import { EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/lib/utils";
 
-export const metadata = { title: "Contact" };
+export const metadata: Metadata = {
+  title: "Request Quote",
+  description:
+    "Request a fixed-scope quote for commercial polished concrete, grind and seal, honed concrete, or epoxy flooring in Perth. Send suburb, area, photos, timing, and slab notes.",
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Request a Commercial Flooring Quote in Perth",
+    description:
+      "Send your commercial flooring details and photos to Perth Commercial Flooring for a fixed-scope quote.",
+    url: absoluteUrl("/contact"),
+  },
+};
 
 const intake = [
-  ["1", "Send the basics", "Suburb, approximate area, finish interest, timing, and whether the slab is new or existing."],
-  ["2", "Site inspection", "We check access, hardness, cracks, moisture risk, coating history, and exposure expectations."],
+  ["1", "Send the basics", "Suburb, approximate area, floor use, traffic, finish interest, timing, and whether the slab is new or existing."],
+  ["2", "Site inspection", "We check access, hardness, cracks, moisture risk, coating history, joints, traffic, and cleaning expectations."],
   ["3", "Fixed-scope quote", "You receive a clear scope, inclusions, finish assumptions, and program notes before work starts."],
 ];
 
 const usefulDetails = [
   "Plans, photos, or a short video of the current slab",
   "Approximate square metres and access constraints",
-  "Preferred finish: polished, honed, grind and seal, or epoxy",
-  "Required handover date or business downtime window",
+  "Preferred system: polished, honed, grind and seal, or epoxy",
+  "Required handover date, business downtime window, or staged access needs",
 ];
 
 export default function ContactPage() {
   return (
     <>
+      <StructuredData
+        data={[
+          webPageJsonLd({
+            path: "/contact",
+            name: "Request a Commercial Flooring Quote in Perth",
+            description:
+              "Contact Perth Commercial Flooring for commercial polished concrete, honed concrete, grind and seal, and epoxy flooring quotes across Perth.",
+            type: "ContactPage",
+          }),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Contact", path: "/contact" },
+          ]),
+        ]}
+      />
       <header className="bg-[var(--color-cream)] pb-14 pt-[calc(var(--nav-h)+72px)] md:pb-20 md:pt-[calc(var(--nav-h)+112px)]">
         <Container>
           <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:items-end">
@@ -31,15 +60,15 @@ export default function ContactPage() {
               </Reveal>
               <Reveal stagger={80}>
                 <h1 className="t-display-md mt-4 max-w-[18ch] text-[var(--color-text-primary)]">
-                  Request a quote or talk through the floor first.
+                  Request a commercial flooring quote.
                 </h1>
               </Reveal>
             </div>
             <Reveal stagger={160} className="md:col-span-4">
               <p className="t-body-lg max-w-[34ch] text-[var(--color-text-muted)] md:ml-auto">
-                A useful quote starts with slab condition, intended use,
-                desired finish, and timing. Send what you have and we will
-                narrow it down.
+                A useful quote starts with slab condition, traffic, cleaning,
+                downtime, desired finish, and timing. Send what you have and we
+                will narrow it down.
               </p>
             </Reveal>
           </div>

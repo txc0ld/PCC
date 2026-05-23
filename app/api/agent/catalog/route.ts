@@ -5,8 +5,8 @@ export const dynamic = "force-static";
 
 export function GET() {
   return NextResponse.json({
-    name: "Perth Concrete Care agent catalog",
-    version: "2026-05-22",
+    name: "Perth Commercial Flooring agent catalog",
+    version: LAST_UPDATED,
     lastModified: LAST_UPDATED,
     business: {
       name: BUSINESS.name,
@@ -21,6 +21,8 @@ export function GET() {
     quoteAction: {
       label: "Request Quote",
       url: `${BASE_URL}/contact#quote`,
+      formEndpoint: `${BASE_URL}/api/quote`,
+      method: "POST",
       email: BUSINESS.email,
       phoneHref: BUSINESS.phoneHref,
     },
@@ -31,7 +33,7 @@ export function GET() {
       serviceType: service.serviceType,
       priceRange: service.priceRange,
       priceCurrency: "AUD",
-      unit: "m²",
+      unit: "m2",
       lowPrice: service.lowPrice,
       highPrice: service.highPrice,
       bestFor: service.bestFor,

@@ -14,8 +14,8 @@ const finishes: Array<{
   copy: string;
 }> = [
   { name: "Cream", depth: "Nil exposure", image: FLOOR_IMAGES.nilExposure, copy: "Soft and minimal. Best when the slab surface is consistent and a quieter finish is preferred." },
-  { name: "Salt and pepper", depth: "Light exposure", image: FLOOR_IMAGES.saltPepper, copy: "Fine sand and small flecks. The most balanced residential polished concrete look." },
-  { name: "Medium aggregate", depth: "3 to 5 mm", image: FLOOR_IMAGES.mediumExposure, copy: "More stone character with a strong architectural read across larger rooms." },
+  { name: "Salt and pepper", depth: "Light exposure", image: FLOOR_IMAGES.saltPepper, copy: "Fine sand and small flecks. A balanced commercial polish for retail, office, and hospitality floors." },
+  { name: "Medium aggregate", depth: "3 to 5 mm", image: FLOOR_IMAGES.mediumExposure, copy: "More stone character with a strong architectural read across showrooms and larger commercial rooms." },
   { name: "Full aggregate", depth: "5 to 8 mm", image: FLOOR_IMAGES.fullStone, copy: "A terrazzo-like finish. Best planned before the pour when aggregate choice matters." },
 ];
 

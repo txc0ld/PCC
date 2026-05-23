@@ -14,20 +14,11 @@ const projects: Array<{
   image: string;
 }> = [
   {
-    slug: "cottesloe-residence",
-    title: "Cottesloe Residence",
-    sector: "Residential",
-    location: "Cottesloe",
-    finish: "Salt and pepper mechanical polish",
-    metric: "180 m²",
-    image: FLOOR_IMAGES.workCottesloe,
-  },
-  {
     slug: "osborne-park-showroom",
     title: "Osborne Park Showroom",
     sector: "Commercial",
     location: "Osborne Park",
-    finish: "Medium exposure polish",
+    finish: "Medium exposure polished concrete",
     metric: "Satin guard",
     image: FLOOR_IMAGES.workOsbornePark,
   },
@@ -40,6 +31,15 @@ const projects: Array<{
     metric: "Forklift traffic",
     image: FLOOR_IMAGES.workKewdale,
   },
+  {
+    slug: "midland-warehouse",
+    title: "Midland Warehouse",
+    sector: "Industrial",
+    location: "Midland",
+    finish: "Epoxy traffic coating",
+    metric: "2,400 m2",
+    image: FLOOR_IMAGES.workMidlandWarehouse,
+  },
 ];
 
 export function FeaturedWork() {
@@ -50,21 +50,21 @@ export function FeaturedWork() {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-12">
             <div className="md:col-span-7">
               <Reveal>
-                <p className="t-eyebrow text-[var(--color-text-inverse)]/56">02 / Selected floors</p>
+                <p className="t-eyebrow text-[var(--color-text-inverse)]/56">02 / Commercial proof</p>
               </Reveal>
               <Reveal stagger={80}>
                 <h2 id="work-heading" className="t-display-sm mt-4 max-w-[13ch] text-[var(--color-text-inverse)]">
-                  Quiet finishes. Hard numbers.
+                  Floors built around traffic, cleaning, and downtime.
                 </h2>
               </Reveal>
             </div>
             <Reveal stagger={160} className="md:col-span-4 md:col-start-9 md:pt-8">
               <p className="t-body text-[var(--color-text-inverse)]/68">
-                A more useful portfolio than mood shots: sector, surface system,
-                constraints, and the outcome each floor had to support.
+                A useful commercial portfolio shows the surface system, site
+                constraint, and operational outcome each floor had to support.
               </p>
               <Link href="/work" className="t-caption link-underline mt-6 text-[var(--color-text-inverse)]">
-                View all work
+                View commercial work
               </Link>
             </Reveal>
           </div>
@@ -107,7 +107,7 @@ function Project({
         <div className="relative overflow-hidden" style={{ aspectRatio: "3/2" }}>
           <Image
             src={project.image}
-            alt={`${project.title} concrete flooring project`}
+            alt={`${project.title} commercial flooring project`}
             fill
             sizes={large ? "(min-width: 1024px) 58vw, 100vw" : "(min-width: 1024px) 42vw, 100vw"}
             className="object-cover transition-transform duration-[var(--duration-slow)] ease-[var(--ease-default)] group-hover:scale-[1.02]"

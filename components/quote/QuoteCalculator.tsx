@@ -621,8 +621,8 @@ function LineItem({
               </span>
             )}
 
-            {/* Fill area button — m² only */}
-            {item.unit === "m²" && area > 0 && (
+            {/* Fill area button — m2 only */}
+            {item.unit === "m2" && area > 0 && (
               <button
                 type="button"
                 onClick={onFillArea}
@@ -638,7 +638,7 @@ function LineItem({
                   transition: "all 180ms cubic-bezier(0.4,0,0.2,1)",
                 }}
               >
-                Fill area ({area} m²)
+                Fill area ({area} m2)
               </button>
             )}
           </div>
@@ -1061,7 +1061,7 @@ function SummaryCard({ state }: SummaryCardProps) {
               fontVariantNumeric: "tabular-nums",
             }}
           >
-            {fmt(calc.perM2)}/m²
+            {fmt(calc.perM2)}/m2
           </span>
         </div>
       )}
@@ -1162,8 +1162,8 @@ function QuoteModal({ open, onClose, state, onPrint }: QuoteModalProps) {
     }`;
     const filename = `PCC-Quote-${refNumber}-${safeName}.pdf`;
     const firstName = state.client.name.split(" ")[0] || "";
-    const subject = `Quote — Perth Concrete Care${state.client.name ? " — " + state.client.name : ""}`;
-    const emailBody = `Hi${firstName ? " " + firstName : ""},\n\nPlease find attached your polished concrete quote.\n\nLet me know if you have any questions or would like to proceed.\n\nKind regards,\nPerth Concrete Care`;
+    const subject = `Quote — Perth Commercial Flooring${state.client.name ? " — " + state.client.name : ""}`;
+    const emailBody = `Hi${firstName ? " " + firstName : ""},\n\nPlease find attached your polished concrete quote.\n\nLet me know if you have any questions or would like to proceed.\n\nKind regards,\nPerth Commercial Flooring`;
 
     if (!quoteBodyRef.current) { setEmailStatus("idle"); return; }
 
@@ -1310,7 +1310,7 @@ function QuoteModal({ open, onClose, state, onPrint }: QuoteModalProps) {
               marginLeft: "auto",
             }}
           >
-            ×
+            �-
           </button>
         </div>
 
@@ -1466,7 +1466,7 @@ function QuoteDocument({ state, calc }: QuoteDocumentProps) {
             <div
               style={{ fontSize: 16, fontWeight: 700, letterSpacing: "-0.01em" }}
             >
-              Perth Concrete Care
+              Perth Commercial Flooring
             </div>
             <div
               style={{
@@ -1492,7 +1492,7 @@ function QuoteDocument({ state, calc }: QuoteDocumentProps) {
         >
           <div>{PHONE_DISPLAY}</div>
           <div>{EMAIL}</div>
-          <div>perthconcretepolishing.com.au</div>
+          <div>perthcommercialfloors.com.au</div>
         </div>
       </div>
 
@@ -1520,7 +1520,7 @@ function QuoteDocument({ state, calc }: QuoteDocumentProps) {
           },
           {
             label: "Floor Area",
-            value: state.area > 0 ? `${state.area} m²` : "—",
+            value: state.area > 0 ? `${state.area} m2` : "—",
           },
           {
             label: "Pricing Tier",
@@ -1820,7 +1820,7 @@ function QuoteDocument({ state, calc }: QuoteDocumentProps) {
               letterSpacing: "-0.02em",
             }}
           >
-            {fmt(calc.perM2)}/m²
+            {fmt(calc.perM2)}/m2
           </span>
         </div>
       )}
@@ -1861,7 +1861,7 @@ function QuoteDocument({ state, calc }: QuoteDocumentProps) {
           Acceptance
         </div>
         <p style={{ fontSize: 11, color: "#8E8E93", marginBottom: 16, lineHeight: 1.5 }}>
-          By signing below, I accept this quote and authorize Perth Concrete Care to proceed with the works described per the terms above. A 30% deposit is required to schedule the job.
+          By signing below, I accept this quote and authorize Perth Commercial Flooring to proceed with the works described per the terms above. A 30% deposit is required to schedule the job.
         </p>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16 }}>
           {["Client Signature", "Print Name", "Date"].map((label) => (
@@ -1891,7 +1891,7 @@ function QuoteDocument({ state, calc }: QuoteDocumentProps) {
           lineHeight: 1.5,
         }}
       >
-        Perth Concrete Care · ABN 63 775 263 307 · perthconcretepolishing.com.au · 0448 483 226
+        Perth Commercial Flooring · ABN 63 775 263 307 · perthcommercialfloors.com.au · 0448 483 226
         <br />
         This quote is generated on-site and remains an estimate until formally issued and accepted.
       </div>
@@ -1942,7 +1942,7 @@ function buildPrintHtml(state: QuoteState): string {
       : "";
   const rateRow =
     state.area > 0
-      ? `<div class="rate-bar"><span class="label">Effective Rate (ex GST)</span><span class="val">${fmt(calc.perM2)}/m²</span></div>`
+      ? `<div class="rate-bar"><span class="label">Effective Rate (ex GST)</span><span class="val">${fmt(calc.perM2)}/m2</span></div>`
       : "";
   const notesHtml = `<div class="notes">
     <strong>Quote validity:</strong> 30 days from issue.<br>
@@ -1954,7 +1954,7 @@ function buildPrintHtml(state: QuoteState): string {
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Quote ${refNum} — Perth Concrete Care</title>
+<title>Quote ${refNum} — Perth Commercial Flooring</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -2022,14 +2022,14 @@ td.total { font-weight: 700; }
   <div class="brand">
     <div class="brand-mark"><span>P</span></div>
     <div>
-      <div class="brand-name">Perth Concrete Care</div>
+      <div class="brand-name">Perth Commercial Flooring</div>
       <div class="brand-ref">Quote #${refNum}</div>
     </div>
   </div>
   <div class="contact-info">
     <div>${PHONE_DISPLAY}</div>
     <div>${EMAIL}</div>
-    <div>perthconcretepolishing.com.au</div>
+    <div>perthcommercialfloors.com.au</div>
   </div>
 </div>
 
@@ -2038,7 +2038,7 @@ td.total { font-weight: 700; }
   <div><small>Date</small><div class="val">${state.client.date || "—"}</div></div>
   <div><small>Site / Address</small><div class="val">${state.client.site || "—"}</div></div>
   <div><small>Contact</small><div class="val">${[state.client.phone, state.client.email].filter(Boolean).join(" · ") || "—"}</div></div>
-  <div><small>Floor Area</small><div class="val">${state.area > 0 ? state.area + " m²" : "—"}</div></div>
+  <div><small>Floor Area</small><div class="val">${state.area > 0 ? state.area + " m2" : "—"}</div></div>
   <div><small>Pricing Tier</small><div class="val">${state.mode.charAt(0).toUpperCase() + state.mode.slice(1)}</div></div>
 </div>
 
@@ -2071,7 +2071,7 @@ ${notesHtml}
 
 <div class="signature-block">
   <h4 class="sig-heading">Acceptance</h4>
-  <p class="sig-intro">By signing below, I accept this quote and authorize Perth Concrete Care to proceed with the works described per the terms above. A 30% deposit is required to schedule the job.</p>
+  <p class="sig-intro">By signing below, I accept this quote and authorize Perth Commercial Flooring to proceed with the works described per the terms above. A 30% deposit is required to schedule the job.</p>
   <div class="sig-grid">
     <div><div class="sig-line"></div><div class="sig-label">Client Signature</div></div>
     <div><div class="sig-line"></div><div class="sig-label">Print Name</div></div>
@@ -2082,7 +2082,7 @@ ${notesHtml}
 <div class="disclaimer">
   This estimate is indicative only and subject to site inspection.<br>
   Prices exclude GST unless stated. Final quote may vary based on slab condition, access and scope confirmation.<br>
-  Valid for 30 days from date of issue. Perth Concrete Care — ABN on invoice.
+  Valid for 30 days from date of issue. Perth Commercial Flooring — ABN on invoice.
 </div>
 </body>
 </html>`;
@@ -2091,12 +2091,12 @@ ${notesHtml}
 function buildCopyText(state: QuoteState): string {
   const calc = calculate(state);
   const lines = [
-    "PERTH CONCRETE CARE — QUOTE",
+    "Perth Commercial Flooring — QUOTE",
     "",
     `Client: ${state.client.name || "—"}`,
     `Site: ${state.client.site || "—"}`,
     `Date: ${state.client.date}`,
-    `Area: ${state.area} m²`,
+    `Area: ${state.area} m2`,
     `Pricing tier: ${state.mode.toUpperCase()}`,
     "",
     "--- ITEMS ---",
@@ -2121,7 +2121,7 @@ function buildCopyText(state: QuoteState): string {
   lines.push(`${state.cashDiscount ? "TOTAL (CASH, GST-FREE)" : "TOTAL + GST"}: ${fmt(calc.grandTotal)}`);
 
   if (state.area > 0)
-    lines.push(`Effective rate (ex GST): ${fmt(calc.perM2)}/m²`);
+    lines.push(`Effective rate (ex GST): ${fmt(calc.perM2)}/m2`);
 
   return lines.join("\n");
 }
@@ -2334,7 +2334,7 @@ export function QuoteCalculator() {
                 marginBottom: 2,
               }}
             >
-              Perth Concrete Care
+              Perth Commercial Flooring
             </div>
             <h1
               style={{
@@ -2463,7 +2463,7 @@ export function QuoteCalculator() {
                         pointerEvents: "none",
                       }}
                     >
-                      m²
+                      m2
                     </span>
                   </div>
                 </div>
@@ -3069,7 +3069,7 @@ export function QuoteCalculator() {
               {calc.lines.length > 0
                 ? `${calc.lines.length} line${calc.lines.length !== 1 ? "s" : ""}${
                     state.area > 0
-                      ? ` · ${fmt(calc.perM2)}/m² ex GST`
+                      ? ` · ${fmt(calc.perM2)}/m2 ex GST`
                       : ""
                   }`
                 : "No items selected"}

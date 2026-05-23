@@ -39,14 +39,14 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-10 border-y border-[var(--hairline-dark)] py-12 md:grid-cols-[1fr_auto] md:items-center">
           <div className="flex items-center gap-5">
             <div className="relative h-20 w-20 shrink-0 overflow-hidden bg-black md:h-24 md:w-24">
-              <Image src="/LOGO.png" alt="Perth Concrete Care" fill sizes="96px" className="object-contain p-2" />
+              <Image src="/LOGO.png" alt="Perth Commercial Flooring" fill sizes="96px" className="object-contain p-2" />
             </div>
             <div>
               <p className="text-[15px] font-extrabold uppercase leading-tight tracking-[0.14em]">
-                Perth Concrete Care
+                Perth Commercial Flooring
               </p>
               <p className="mt-2 max-w-[42ch] text-[14px] leading-relaxed text-[var(--color-text-inverse)]/62">
-                Polished concrete, honed concrete, grind and seal, and epoxy flooring across Perth.
+                Commercial polished concrete, grind and seal, honed concrete, and epoxy flooring across Perth.
               </p>
             </div>
           </div>
@@ -85,8 +85,8 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col gap-3 border-t border-[var(--hairline-dark)] pt-6 text-[var(--color-text-inverse)]/46 md:flex-row md:items-center md:justify-between">
-          <p className="t-caption">Copyright {new Date().getFullYear()} Perth Concrete Care.</p>
-          <p className="t-caption">ABN: 63 775 263 307 / Perth metro / Residential / Commercial / Industrial.</p>
+          <p className="t-caption">Copyright {new Date().getFullYear()} Perth Commercial Flooring.</p>
+          <p className="t-caption">ABN: 63 775 263 307 / Perth metro / Commercial / Hospitality / Industrial.</p>
         </div>
       </div>
     </footer>

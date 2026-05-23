@@ -7,36 +7,36 @@ import { cn, PHONE_DISPLAY, PHONE_HREF } from "@/lib/utils";
 
 const faqs = [
   {
-    q: "Can every concrete slab be polished?",
-    a: "Most slabs can be improved, but not every slab should be polished to the same finish. We assess hardness, moisture, cracks, previous coatings, aggregate depth, and edge conditions before recommending a system.",
+    q: "What commercial flooring systems do you install in Perth?",
+    a: "We install commercial polished concrete, grind and seal, honed concrete, epoxy coatings, flake systems, polyaspartic top coats, and concrete surface preparation for warehouses, showrooms, hospitality venues, retail spaces, workshops, commercial kitchens, and plant rooms.",
   },
   {
-    q: "What is the difference between polished concrete and grind and seal?",
-    a: "Mechanical polish refines and hardens the concrete itself. Grind and seal flattens the slab and protects it with a coating. Both can be useful, but they age and maintain differently.",
+    q: "What is best for a warehouse floor?",
+    a: "Most warehouse floors suit grind and seal or epoxy coating depending on traffic, cleaning, chemical exposure, downtime, and whether line marking is required. We inspect slab hardness, contamination, cracks, joints, and coating history before specifying the system.",
   },
   {
-    q: "How long does a typical residential floor take?",
-    a: "A 150 to 250 m² home usually takes around one to two weeks depending on exposure, repairs, edges, coating cure windows, and access around other trades.",
+    q: "What is best for a showroom or retail floor?",
+    a: "Showrooms and retail floors often suit mechanical polished concrete because it provides light return, long service life, and a premium architectural finish. Where stain resistance, colour, or faster return-to-service matter more, epoxy or polyaspartic systems may be better.",
   },
   {
-    q: "How much does polished concrete cost in Perth?",
-    a: "As a planning guide, mechanical polished concrete is about $160 to $220 per m², honed concrete is $120 to $160 per m², grind and seal is $65 to $95 per m², and epoxy flake systems start from $75 to $100 per m². Final pricing follows site inspection.",
+    q: "How long does a commercial floor take?",
+    a: "Small commercial floors can often be completed in a few days. Larger warehouses, staged tenancies, food preparation areas, or high-build epoxy systems may need a longer program because of preparation, repairs, cure windows, and business access requirements.",
   },
   {
-    q: "Does Perth Concrete Care provide epoxy flooring?",
-    a: "Yes. We provide epoxy and polyaspartic coating systems for Perth garages, workshops, commercial kitchens, plant rooms, marked work zones, and other working floors that need cleanability, chemical resistance, slip awareness, or fast return to use.",
+    q: "How much do commercial concrete floors cost in Perth?",
+    a: "As a planning guide, grind and seal is usually $65 to $95 per m2, epoxy flake systems are typically $75 to $100 per m2, honed concrete is $120 to $160 per m2, and mechanical polished concrete is about $160 to $220 per m2. Final pricing follows site inspection.",
   },
   {
-    q: "Do you work on new builds and existing homes?",
-    a: "Yes. New builds allow better planning and protection. Existing homes need careful dust control, protection, and sequencing. We scope both before pricing.",
+    q: "Can you work after hours or around business operations?",
+    a: "Yes. We can stage commercial flooring works around operating hours, handover dates, tenancy fitouts, stock movement, and access windows. The quote confirms dust control, cure time, exclusion zones, and return-to-service assumptions.",
   },
   {
-    q: "Is polished concrete slippery?",
-    a: "Dry polished concrete has a comparable feel to many hard flooring surfaces. Wet areas, external zones, and commercial spaces may require honed finishes, additives, or specified slip ratings.",
+    q: "Do epoxy floors suit commercial kitchens and plant rooms?",
+    a: "Yes, provided the correct preparation, primer, body coat, slip profile, and top coat are specified. Commercial kitchens, plant rooms, and wash-down areas need close attention to moisture, drainage, chemical exposure, cleaning method, and cure timing.",
   },
   {
     q: "Where do you work?",
-    a: "Our core area is Perth metro and roughly 100 km from the CBD, including Fremantle, Joondalup, Midland, Rockingham, Mandurah, Welshpool, and surrounding suburbs.",
+    a: "Our core area is Perth metro and surrounding commercial and industrial suburbs, including Osborne Park, Kewdale, Welshpool, Malaga, Canning Vale, Wangara, Bibra Lake, Henderson, Midland, Subiaco, Fremantle, Joondalup, Rockingham, and Mandurah.",
   },
 ];
 
@@ -53,11 +53,11 @@ export function FAQ() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-4">
             <Reveal>
-              <p className="t-eyebrow text-[var(--color-text-muted)]">09 / FAQ</p>
+              <p className="t-eyebrow text-[var(--color-text-muted)]">09 / Commercial FAQ</p>
             </Reveal>
             <Reveal stagger={80}>
               <h2 id="faq-heading" className="t-display-sm mt-4 text-[var(--color-text-primary)]">
-                Questions worth asking before work starts.
+                Questions to settle before the floor shuts down a site.
               </h2>
             </Reveal>
             <Reveal stagger={160}>

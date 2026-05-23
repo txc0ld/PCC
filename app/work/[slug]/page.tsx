@@ -5,6 +5,8 @@ import { notFound } from "next/navigation";
 import { LinkButton } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import { StructuredData } from "@/components/StructuredData";
+import { absoluteUrl, breadcrumbJsonLd, webPageJsonLd } from "@/lib/geo";
 import { FLOOR_IMAGES } from "@/lib/images";
 
 type Project = {
@@ -23,25 +25,11 @@ type Project = {
 };
 
 const projects: Record<string, Project> = {
-  "cottesloe-residence": {
-    title: "Cottesloe Residence",
-    category: "Residential",
-    year: "2025",
-    area: "240 m²",
-    location: "Cottesloe",
-    finish: "Satin polished concrete",
-    image: FLOOR_IMAGES.workCottesloe,
-    summary: "A calm internal polish for a coastal home where glare control and edge detailing mattered as much as sheen.",
-    brief: "The client wanted a continuous ground-floor surface that felt refined without becoming glossy or slippery in bright western light.",
-    scope: ["Aggregate exposure sample before full grind", "Satin mechanical polish through living areas", "Edge refinement around joinery and thresholds", "Final guard and maintenance handover"],
-    details: [["Use", "Open-plan residential"], ["Constraint", "High natural light"], ["Finish", "Satin polish"], ["Program", "Staged around joinery"]],
-    result: "A quiet, light-responsive floor that gives the home a single material base without fighting the coastal palette.",
-  },
   "osborne-park-showroom": {
     title: "Osborne Park Showroom",
     category: "Commercial",
     year: "2024",
-    area: "620 m²",
+    area: "620 m2",
     location: "Osborne Park",
     finish: "Full exposure polish",
     image: FLOOR_IMAGES.workOsbornePark,
@@ -55,7 +43,7 @@ const projects: Record<string, Project> = {
     title: "Kewdale Warehouse",
     category: "Industrial",
     year: "2024",
-    area: "1,850 m²",
+    area: "1,850 m2",
     location: "Kewdale",
     finish: "Grind and seal",
     image: FLOOR_IMAGES.workKewdale,
@@ -65,25 +53,11 @@ const projects: Record<string, Project> = {
     details: [["Use", "Warehouse"], ["Constraint", "Operational downtime"], ["Finish", "Grind and seal"], ["Program", "Staged zones"]],
     result: "A cleaner, brighter slab with a clear maintenance cycle and minimal disruption to operations.",
   },
-  "peppermint-grove-house": {
-    title: "Peppermint Grove House",
-    category: "Residential",
-    year: "2024",
-    area: "310 m²",
-    location: "Peppermint Grove",
-    finish: "Low-glare honed concrete",
-    image: FLOOR_IMAGES.workPeppermintGrove,
-    summary: "A low-glare honed finish selected for a restrained residential interior with natural stone and timber.",
-    brief: "The floor needed material depth without a polished reflection, keeping the interior calm through large glazed openings.",
-    scope: ["Controlled exposure grind", "Scratch refinement to low-glare finish", "Penetrating guard", "Cleaning and reseal advice"],
-    details: [["Use", "Residential interior"], ["Constraint", "Low glare"], ["Finish", "Honed concrete"], ["Program", "Pre-handover"]],
-    result: "A grounded concrete surface with texture and restraint, suited to daily family use.",
-  },
   "north-perth-cafe": {
     title: "North Perth Cafe",
     category: "Hospitality",
     year: "2024",
-    area: "140 m²",
+    area: "140 m2",
     location: "North Perth",
     finish: "Honed and guarded",
     image: FLOOR_IMAGES.workNorthPerthCafe,
@@ -93,25 +67,11 @@ const projects: Record<string, Project> = {
     details: [["Use", "Cafe"], ["Constraint", "Food and drink spills"], ["Finish", "Honed and guarded"], ["Program", "Fitout sequence"]],
     result: "A durable, tactile surface that supports the fitout while keeping cleaning straightforward.",
   },
-  "fremantle-loft": {
-    title: "Fremantle Loft",
-    category: "Residential",
-    year: "2023",
-    area: "180 m²",
-    location: "Fremantle",
-    finish: "Salt and pepper polish",
-    image: FLOOR_IMAGES.workFremantleLoft,
-    summary: "A compact residential polish using the slab's natural fleck rather than forcing heavy exposure.",
-    brief: "The apartment needed a lighter finish with enough movement to sit comfortably against brick, steel, and old timber.",
-    scope: ["Salt and pepper grind", "Densifier and satin polish", "Careful wall and stair edge work", "Final guard"],
-    details: [["Use", "Apartment"], ["Constraint", "Existing slab variation"], ["Finish", "Salt and pepper polish"], ["Program", "Renovation"]],
-    result: "A bright, efficient finish that works with the building's existing material character.",
-  },
   "subiaco-gallery": {
     title: "Subiaco Gallery",
     category: "Commercial",
     year: "2023",
-    area: "420 m²",
+    area: "420 m2",
     location: "Subiaco",
     finish: "Matte polished concrete",
     image: FLOOR_IMAGES.workSubiacoGallery,
@@ -125,7 +85,7 @@ const projects: Record<string, Project> = {
     title: "Midland Warehouse",
     category: "Industrial",
     year: "2023",
-    area: "2,400 m²",
+    area: "2,400 m2",
     location: "Midland",
     finish: "Epoxy traffic coating",
     image: FLOOR_IMAGES.workMidlandWarehouse,
@@ -146,7 +106,21 @@ export async function generateMetadata(props: {
 }): Promise<Metadata> {
   const { slug } = await props.params;
   const project = projects[slug];
-  return { title: project ? project.title : "Project" };
+  if (!project) return { title: "Project" };
+
+  const description = `${project.title} is a ${project.category.toLowerCase()} ${project.finish.toLowerCase()} project in ${project.location}, Perth. ${project.summary}`;
+
+  return {
+    title: `${project.title} commercial flooring project`,
+    description,
+    alternates: { canonical: `/work/${slug}` },
+    openGraph: {
+      title: `${project.title} commercial flooring project`,
+      description,
+      url: absoluteUrl(`/work/${slug}`),
+      images: [{ url: project.image, width: 1536, height: 1024, alt: `${project.title} commercial flooring project` }],
+    },
+  };
 }
 
 export default async function ProjectDetail(props: {
@@ -155,9 +129,23 @@ export default async function ProjectDetail(props: {
   const { slug } = await props.params;
   const project = projects[slug];
   if (!project) notFound();
+  const schema = [
+    webPageJsonLd({
+      path: `/work/${slug}`,
+      name: `${project.title} commercial flooring project`,
+      description: project.summary,
+      image: project.image,
+    }),
+    breadcrumbJsonLd([
+      { name: "Home", path: "/" },
+      { name: "Work", path: "/work" },
+      { name: project.title, path: `/work/${slug}` },
+    ]),
+  ];
 
   return (
     <>
+      <StructuredData data={schema} />
       <header className="bg-[var(--color-cream)] pb-14 pt-[calc(var(--nav-h)+72px)] md:pb-20 md:pt-[calc(var(--nav-h)+112px)]">
         <Container>
           <Reveal>
@@ -201,7 +189,7 @@ export default async function ProjectDetail(props: {
           <Reveal stagger={320} className="mt-10">
             <Image
               src={project.image}
-              alt={`${project.title} concrete flooring project`}
+              alt={`${project.title} commercial flooring project`}
               width={1536}
               height={1024}
               sizes="(min-width: 1024px) 1248px, 100vw"

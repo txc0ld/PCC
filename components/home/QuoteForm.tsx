@@ -21,41 +21,50 @@ const initial: State = {
 
 export function QuoteForm() {
   const [values, setValues] = useState<State>(initial);
-  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [contactError, setContactError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onChange =
     (key: FieldKey) =>
     (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
       setValues((current) => {
         if (key === "email" || key === "phone") setContactError(false);
+        if (status === "error") setStatus("idle");
         return { ...current, [key]: event.target.value };
       });
 
-  const submit = async (event: React.FormEvent) => {
+  const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     if (!values.email.trim() && !values.phone.trim()) {
       setContactError(true);
       return;
     }
+
     setStatus("sending");
-    const subject = `Quote request - ${values.suburb || "Perth Concrete Care"}`;
-    const body = [
-      "New website quote request",
-      "",
-      `Name: ${values.name}`,
-      `Suburb: ${values.suburb}`,
-      `Approx. area: ${values.area} m²`,
-      `Finish interest: ${values.finish || "Not sure yet"}`,
-      `Email: ${values.email}`,
-      `Phone: ${values.phone}`,
-      "",
-      "Slab, timing and goals:",
-      values.description || "-",
-    ].join("\n");
-    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    await new Promise((resolve) => setTimeout(resolve, 300));
-    setStatus("sent");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/quote", {
+        method: "POST",
+        body: new FormData(event.currentTarget),
+      });
+      const payload = (await response.json().catch(() => ({}))) as { error?: string };
+
+      if (!response.ok) {
+        throw new Error(payload.error || "The quote request could not be sent.");
+      }
+
+      setStatus("sent");
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "The quote request could not be sent. Please call or email us directly."
+      );
+    }
   };
 
   return (
@@ -72,14 +81,14 @@ export function QuoteForm() {
             </Reveal>
             <Reveal stagger={80}>
               <h2 id="quote-heading" className="t-display-sm mt-4 text-[var(--color-text-inverse)]">
-                Start with the slab, then the finish.
+                Start with the site, then the system.
               </h2>
             </Reveal>
             <Reveal stagger={160}>
               <p className="t-body mt-6 max-w-[44ch] text-[var(--color-text-inverse)]/70">
                 Send the essentials and we will arrange a site inspection,
-                confirm the right flooring system, and return a fixed-scope
-                quote.
+                confirm the right commercial flooring system, and return a
+                fixed-scope quote.
               </p>
             </Reveal>
 
@@ -103,16 +112,16 @@ export function QuoteForm() {
                   Thanks, {values.name.split(" ")[0] || "there"}.
                 </p>
                 <p className="t-body mt-4 max-w-[46ch] text-[var(--color-text-inverse)]/70">
-                  Your email app should open with the request addressed to
-                  {` ${EMAIL}`}. Send it through and we will respond within one
-                  working day.
+                  Your request has been sent directly to {EMAIL}. We will
+                  respond within one working day.
                 </p>
               </div>
             ) : (
-              <form onSubmit={submit} className="grid grid-cols-1 gap-3 md:grid-cols-6">
+              <form onSubmit={submit} encType="multipart/form-data" className="grid grid-cols-1 gap-3 md:grid-cols-6">
+                <input type="text" name="company" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
                 <Field label="Name" name="name" value={values.name} onChange={onChange("name")} required autoComplete="name" className="md:col-span-6" />
                 <Field label="Suburb" name="suburb" value={values.suburb} onChange={onChange("suburb")} required autoComplete="address-level2" className="md:col-span-3" />
-                <Field label="Approx. area (m²)" name="area" type="number" value={values.area} onChange={onChange("area")} required inputMode="decimal" className="md:col-span-3" />
+                <Field label="Approx. area (m2)" name="area" type="number" value={values.area} onChange={onChange("area")} required inputMode="decimal" className="md:col-span-3" />
                 <SelectField label="Finish interest" name="finish" value={values.finish} onChange={onChange("finish")} className="md:col-span-6" />
                 <Field label="Email" name="email" type="email" value={values.email} onChange={onChange("email")} autoComplete="email" inputMode="email" className="md:col-span-3" />
                 <Field label="Phone" name="phone" type="tel" value={values.phone} onChange={onChange("phone")} autoComplete="tel" inputMode="tel" className="md:col-span-3" />
@@ -121,14 +130,34 @@ export function QuoteForm() {
                     Add an email or phone number so we can return the quote.
                   </p>
                 )}
-                <Field label="Slab, timing, goals" name="description" textarea value={values.description} onChange={onChange("description")} className="md:col-span-6" />
+                <Field label="Traffic, slab, timing, goals" name="description" textarea value={values.description} onChange={onChange("description")} className="md:col-span-6" />
+                <label className="grid gap-2 border border-[var(--hairline-dark)] px-4 py-3 md:col-span-6">
+                  <span className="text-[10px] uppercase tracking-[0.1em] text-[var(--color-text-inverse)]/55">
+                    Photos optional
+                  </span>
+                  <input
+                    type="file"
+                    name="photos"
+                    accept="image/*,.heic,.heif"
+                    multiple
+                    className="text-[13px] text-[var(--color-text-inverse)]/70 file:mr-4 file:border-0 file:bg-[var(--color-pcc-green)] file:px-3 file:py-2 file:text-[12px] file:font-semibold file:text-[var(--color-ink)]"
+                  />
+                  <span className="t-caption text-[var(--color-text-inverse)]/45">
+                    Up to 5 photos, 8 MB each.
+                  </span>
+                </label>
+                {status === "error" && (
+                  <p className="t-caption text-[var(--color-oxide)] md:col-span-6" role="alert">
+                    {errorMessage}
+                  </p>
+                )}
 
                 <div className="mt-5 flex flex-col gap-4 md:col-span-6 md:flex-row md:items-center">
                   <Button type="submit" variant="accent" disabled={status === "sending"}>
                     {status === "sending" ? "Sending..." : "Request Quote"}
                   </Button>
                   <p className="t-caption max-w-[38ch] text-[var(--color-text-inverse)]/55">
-                    Include photos, access notes, timing, and whether the slab is new or existing.
+                    Include photos, access notes, traffic type, timing, and whether the slab is new or existing.
                   </p>
                 </div>
               </form>
@@ -244,6 +273,7 @@ function SelectField({
         <option value="honed">Honed concrete</option>
         <option value="grind-seal">Grind and seal</option>
         <option value="epoxy">Epoxy coating</option>
+        <option value="traffic-coating">Epoxy traffic coating</option>
       </select>
     </label>
   );

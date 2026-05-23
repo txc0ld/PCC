@@ -33,9 +33,18 @@ export function Nav() {
   }, [pathname]);
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    if (!open) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const previousTouchAction = document.body.style.touchAction;
+    const previousOverscroll = document.body.style.overscrollBehavior;
+    document.body.style.overflow = "hidden";
+    document.body.style.touchAction = "none";
+    document.body.style.overscrollBehavior = "contain";
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
+      document.body.style.touchAction = previousTouchAction;
+      document.body.style.overscrollBehavior = previousOverscroll;
     };
   }, [open]);
 
@@ -50,13 +59,13 @@ export function Nav() {
         )}
       >
         <div className="container-pcc flex h-[var(--nav-h)] items-center justify-between gap-5">
-          <Link href="/" aria-label="Perth Concrete Care home" className="flex items-center gap-3">
+          <Link href="/" aria-label="Perth Commercial Flooring home" className="flex items-center gap-3">
             <span className="leading-none">
               <span className={cn("block text-[12px] font-extrabold uppercase tracking-[0.14em]", solid ? "text-[var(--color-text-primary)]" : "text-[var(--color-text-inverse)]")}>
-                Perth Concrete Care
+                Perth Commercial Flooring
               </span>
               <span className={cn("mt-1 hidden text-[11px] uppercase tracking-[0.14em] sm:block", solid ? "text-[var(--color-text-muted)]" : "text-[var(--color-text-inverse)]/58")}>
-                Surface systems / WA
+                Commercial floor systems / WA
               </span>
             </span>
           </Link>
